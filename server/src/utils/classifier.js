@@ -1,4 +1,4 @@
-const OpenAI = require('openai');
+const Groq = require('groq-sdk');
 
 const KEYWORD_MAP = {
   // Food
@@ -124,13 +124,13 @@ function classifyByKeyword(description) {
 }
 
 async function classifyWithAI(description) {
-  if (!process.env.OPENAI_API_KEY) return null;
+  if (!process.env.GROQ_API_KEY) return null;
 
   try {
-    const client = new OpenAI({ apiKey: process.env.OPENAI_API_KEY });
+    const client = new Groq({ apiKey: process.env.GROQ_API_KEY });
 
     const response = await client.chat.completions.create({
-      model: 'gpt-3.5-turbo',
+      model: 'llama-3.3-70b-versatile',
       messages: [
         {
           role: 'system',
@@ -160,7 +160,7 @@ async function classifyWithAI(description) {
     ];
     return valid.includes(category) ? category : 'Other';
   } catch (err) {
-    console.error('OpenAI classification error:', err.message);
+    console.error('Groq classification error:', err.message);
     return null;
   }
 }
