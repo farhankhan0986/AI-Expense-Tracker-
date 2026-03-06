@@ -5,17 +5,17 @@ import * as api from '../utils/api';
 import ExpenseForm from '../components/ExpenseForm';
 
 const DEMO_EXPENSES = [
-  { _id: '1', description: 'Morning Coffee', category: 'food', amount: 4.50, date: '2025-01-15' },
-  { _id: '2', description: 'Uber to Office', category: 'transport', amount: 12.00, date: '2025-01-14' },
-  { _id: '3', description: 'Netflix Subscription', category: 'entertainment', amount: 15.99, date: '2025-01-13' },
-  { _id: '4', description: 'Grocery Run', category: 'food', amount: 67.30, date: '2025-01-12' },
-  { _id: '5', description: 'Electric Bill', category: 'utilities', amount: 89.00, date: '2025-01-11' },
-  { _id: '6', description: 'New Sneakers', category: 'shopping', amount: 149.99, date: '2025-01-10' },
-  { _id: '7', description: 'Pharmacy', category: 'health', amount: 23.40, date: '2025-01-09' },
-  { _id: '8', description: 'Online Course', category: 'education', amount: 29.99, date: '2025-01-08' },
+  { _id: '1', description: 'Morning Coffee', category: 'Food', amount: 4.50, date: '2025-01-15' },
+  { _id: '2', description: 'Uber to Office', category: 'Transport', amount: 12.00, date: '2025-01-14' },
+  { _id: '3', description: 'Netflix Subscription', category: 'Entertainment', amount: 15.99, date: '2025-01-13' },
+  { _id: '4', description: 'Grocery Run', category: 'Food', amount: 67.30, date: '2025-01-12' },
+  { _id: '5', description: 'Electric Bill', category: 'Bills', amount: 89.00, date: '2025-01-11' },
+  { _id: '6', description: 'New Sneakers', category: 'Shopping', amount: 149.99, date: '2025-01-10' },
+  { _id: '7', description: 'Pharmacy', category: 'Health', amount: 23.40, date: '2025-01-09' },
+  { _id: '8', description: 'Online Course', category: 'Education', amount: 29.99, date: '2025-01-08' },
 ];
 
-const CATEGORIES = ['all', 'food', 'transport', 'entertainment', 'utilities', 'shopping', 'health', 'education', 'other'];
+const CATEGORIES = ['all', 'Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Other'];
 
 export default function Expenses() {
   const [expenses, setExpenses] = useState([]);
@@ -120,7 +120,7 @@ export default function Expenses() {
           >
             {CATEGORIES.map((c) => (
               <option key={c} value={c}>
-                {c === 'all' ? 'All Categories' : c.charAt(0).toUpperCase() + c.slice(1)}
+                {c === 'all' ? 'All Categories' : c}
               </option>
             ))}
           </select>

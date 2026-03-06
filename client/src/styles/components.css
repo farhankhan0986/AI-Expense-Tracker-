@@ -513,14 +513,15 @@
   text-transform: capitalize;
 }
 
-.category-badge.food        { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
-.category-badge.transport   { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
-.category-badge.entertainment { background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); }
-.category-badge.utilities   { background: rgba(45, 212, 191, 0.15); color: var(--accent-teal); }
-.category-badge.shopping    { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
-.category-badge.health      { background: rgba(52, 211, 153, 0.15); color: var(--success); }
-.category-badge.education   { background: rgba(96, 165, 250, 0.15); color: var(--info); }
-.category-badge.other       { background: rgba(255, 255, 255, 0.08); color: var(--text-secondary); }
+.category-badge.Food        { background: rgba(249, 115, 22, 0.15); color: var(--accent-orange); }
+.category-badge.Transport   { background: rgba(59, 130, 246, 0.15); color: var(--accent-blue); }
+.category-badge.Entertainment { background: rgba(236, 72, 153, 0.15); color: var(--accent-pink); }
+.category-badge.Bills       { background: rgba(45, 212, 191, 0.15); color: var(--accent-teal); }
+.category-badge.Shopping    { background: rgba(168, 85, 247, 0.15); color: var(--accent-purple); }
+.category-badge.Health      { background: rgba(52, 211, 153, 0.15); color: var(--success); }
+.category-badge.Education   { background: rgba(96, 165, 250, 0.15); color: var(--info); }
+.category-badge.Travel      { background: rgba(251, 191, 36, 0.15); color: var(--warning); }
+.category-badge.Other       { background: rgba(255, 255, 255, 0.08); color: var(--text-secondary); }
 
 /* ===== BUDGET ALERT ===== */
 .budget-alert {

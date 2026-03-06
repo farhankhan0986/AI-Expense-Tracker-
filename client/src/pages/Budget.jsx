@@ -4,17 +4,18 @@ import { Wallet, Plus, Save } from 'lucide-react';
 import * as api from '../utils/api';
 import BudgetAlert from '../components/BudgetAlert';
 
-const CATEGORIES = ['food', 'transport', 'entertainment', 'utilities', 'shopping', 'health', 'education', 'other'];
+const CATEGORIES = ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Other'];
 
 const DEMO_BUDGETS = {
-  food: { limit: 500, spent: 420 },
-  transport: { limit: 200, spent: 145 },
-  entertainment: { limit: 200, spent: 210 },
-  utilities: { limit: 350, spent: 310 },
-  shopping: { limit: 300, spent: 150 },
-  health: { limit: 150, spent: 90 },
-  education: { limit: 100, spent: 30 },
-  other: { limit: 200, spent: 60 },
+  Food: { limit: 500, spent: 420 },
+  Transport: { limit: 200, spent: 145 },
+  Entertainment: { limit: 200, spent: 210 },
+  Bills: { limit: 350, spent: 310 },
+  Shopping: { limit: 300, spent: 150 },
+  Health: { limit: 150, spent: 90 },
+  Education: { limit: 100, spent: 30 },
+  Travel: { limit: 200, spent: 60 },
+  Other: { limit: 200, spent: 40 },
 };
 
 const item = {
@@ -99,7 +100,7 @@ export default function Budget() {
   // Derive alerts from budgets
   const derivedAlerts = Object.entries(budgets)
     .map(([cat, { limit, spent }]) => ({
-      category: cat.charAt(0).toUpperCase() + cat.slice(1),
+      category: cat,
       limit,
       spent,
       percentage: limit > 0 ? (spent / limit) * 100 : 0,
@@ -131,7 +132,7 @@ export default function Budget() {
               >
                 <option value="">Category</option>
                 {CATEGORIES.map((c) => (
-                  <option key={c} value={c}>{c.charAt(0).toUpperCase() + c.slice(1)}</option>
+                  <option key={c} value={c}>{c}</option>
                 ))}
               </select>
               <input
@@ -169,7 +170,7 @@ export default function Budget() {
                 return (
                   <div key={cat} className="glass-card" style={{ padding: '16px 20px' }}>
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
-                      <span style={{ fontWeight: 600, textTransform: 'capitalize' }}>{cat}</span>
+                      <span style={{ fontWeight: 600 }}>{cat}</span>
                       <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
                         ${b.spent.toFixed(0)} / ${b.limit.toFixed(0)}
                       </span>

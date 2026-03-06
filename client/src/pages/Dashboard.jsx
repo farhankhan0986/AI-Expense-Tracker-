@@ -12,11 +12,11 @@ import BudgetAlert from '../components/BudgetAlert';
 
 /* Demo data for standalone viewing */
 const DEMO_EXPENSES = [
-  { _id: '1', description: 'Morning Coffee', category: 'food', amount: 4.50, date: '2025-01-15' },
-  { _id: '2', description: 'Uber to Office', category: 'transport', amount: 12.00, date: '2025-01-14' },
-  { _id: '3', description: 'Netflix Subscription', category: 'entertainment', amount: 15.99, date: '2025-01-13' },
-  { _id: '4', description: 'Grocery Run', category: 'food', amount: 67.30, date: '2025-01-12' },
-  { _id: '5', description: 'Electric Bill', category: 'utilities', amount: 89.00, date: '2025-01-11' },
+  { _id: '1', description: 'Morning Coffee', category: 'Food', amount: 4.50, date: '2025-01-15' },
+  { _id: '2', description: 'Uber to Office', category: 'Transport', amount: 12.00, date: '2025-01-14' },
+  { _id: '3', description: 'Netflix Subscription', category: 'Entertainment', amount: 15.99, date: '2025-01-13' },
+  { _id: '4', description: 'Grocery Run', category: 'Food', amount: 67.30, date: '2025-01-12' },
+  { _id: '5', description: 'Electric Bill', category: 'Bills', amount: 89.00, date: '2025-01-11' },
 ];
 
 const DEMO_CHART = [

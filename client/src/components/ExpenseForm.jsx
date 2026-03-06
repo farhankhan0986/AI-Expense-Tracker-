@@ -2,14 +2,15 @@ import { useState } from 'react';
 import { Plus } from 'lucide-react';
 
 const CATEGORIES = [
-  'food',
-  'transport',
-  'entertainment',
-  'utilities',
-  'shopping',
-  'health',
-  'education',
-  'other',
+  'Food',
+  'Transport',
+  'Shopping',
+  'Entertainment',
+  'Bills',
+  'Health',
+  'Education',
+  'Travel',
+  'Other',
 ];
 
 export default function ExpenseForm({ onSubmit, loading }) {
@@ -28,13 +29,14 @@ export default function ExpenseForm({ onSubmit, loading }) {
     // Simple keyword-based auto-classification suggestion
     if (name === 'description') {
       const lower = value.toLowerCase();
-      if (/uber|taxi|bus|train|fuel|gas|metro/.test(lower)) setSuggestedCategory('transport');
-      else if (/pizza|coffee|lunch|dinner|restaurant|food|grocery/.test(lower)) setSuggestedCategory('food');
-      else if (/netflix|movie|spotify|concert|game/.test(lower)) setSuggestedCategory('entertainment');
-      else if (/electric|water|internet|phone|rent/.test(lower)) setSuggestedCategory('utilities');
-      else if (/amazon|clothes|shoes|mall/.test(lower)) setSuggestedCategory('shopping');
-      else if (/doctor|medicine|gym|pharmacy|hospital/.test(lower)) setSuggestedCategory('health');
-      else if (/book|course|tuition|school|university/.test(lower)) setSuggestedCategory('education');
+      if (/uber|taxi|bus|train|fuel|gas|metro/.test(lower)) setSuggestedCategory('Transport');
+      else if (/pizza|coffee|lunch|dinner|restaurant|food|grocery/.test(lower)) setSuggestedCategory('Food');
+      else if (/netflix|movie|spotify|concert|game/.test(lower)) setSuggestedCategory('Entertainment');
+      else if (/electric|water|internet|phone|rent/.test(lower)) setSuggestedCategory('Bills');
+      else if (/amazon|clothes|shoes|mall/.test(lower)) setSuggestedCategory('Shopping');
+      else if (/doctor|medicine|gym|pharmacy|hospital/.test(lower)) setSuggestedCategory('Health');
+      else if (/book|course|tuition|school|university/.test(lower)) setSuggestedCategory('Education');
+      else if (/flight|hotel|airbnb|vacation/.test(lower)) setSuggestedCategory('Travel');
       else setSuggestedCategory('');
     }
   };
@@ -119,7 +121,7 @@ export default function ExpenseForm({ onSubmit, loading }) {
           >
             <option value="">Select category</option>
             {CATEGORIES.map((cat) => (
-              <option key={cat} value={cat}>{cat.charAt(0).toUpperCase() + cat.slice(1)}</option>
+              <option key={cat} value={cat}>{cat}</option>
             ))}
           </select>
         </div>

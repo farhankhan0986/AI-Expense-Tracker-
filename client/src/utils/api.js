@@ -75,19 +75,20 @@ export async function deleteExpense(id) {
 
 export async function uploadStatement(file) {
   const formData = new FormData();
-  formData.append('statement', file);
+  formData.append('file', file);
   return request('/expenses/upload', {
     method: 'POST',
     body: formData,
   });
 }
 
-export async function getMonthlyAnalytics() {
-  return request('/analytics/monthly');
+export async function getMonthlyAnalytics(month) {
+  const m = month || new Date().toISOString().slice(0, 7);
+  return request(`/analytics/monthly?month=${encodeURIComponent(m)}`);
 }
 
 export async function getSpendingTrend() {
-  return request('/analytics/trend');
+  return request('/analytics/trends');
 }
 
 export async function getSavingSuggestions() {
@@ -95,7 +96,7 @@ export async function getSavingSuggestions() {
 }
 
 export async function getBudgetAlerts() {
-  return request('/budget/alerts');
+  return request('/analytics/alerts');
 }
 
 export async function setBudgetLimit(category, limit) {
