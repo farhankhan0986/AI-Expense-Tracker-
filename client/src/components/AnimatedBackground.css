@@ -1,0 +1,58 @@
+.animated-bg {
+  position: fixed;
+  inset: 0;
+  overflow: hidden;
+  pointer-events: none;
+  z-index: 0;
+}
+
+.blob {
+  position: absolute;
+  border-radius: 50%;
+  filter: blur(100px);
+  opacity: 0.35;
+}
+
+.blob-1 {
+  width: 500px;
+  height: 500px;
+  background: radial-gradient(circle, rgba(168, 85, 247, 0.6) 0%, transparent 70%);
+  top: -10%;
+  right: -5%;
+  animation: blobFloat1 22s ease-in-out infinite;
+}
+
+.blob-2 {
+  width: 450px;
+  height: 450px;
+  background: radial-gradient(circle, rgba(45, 212, 191, 0.5) 0%, transparent 70%);
+  bottom: -8%;
+  left: -8%;
+  animation: blobFloat2 26s ease-in-out infinite;
+}
+
+.blob-3 {
+  width: 350px;
+  height: 350px;
+  background: radial-gradient(circle, rgba(236, 72, 153, 0.45) 0%, transparent 70%);
+  top: 40%;
+  left: 30%;
+  animation: blobFloat3 20s ease-in-out infinite;
+}
+
+.blob-4 {
+  width: 300px;
+  height: 300px;
+  background: radial-gradient(circle, rgba(59, 130, 246, 0.4) 0%, transparent 70%);
+  top: 20%;
+  right: 25%;
+  animation: blobFloat4 24s ease-in-out infinite;
+}
+
+@media (max-width: 768px) {
+  .blob { filter: blur(80px); opacity: 0.25; }
+  .blob-1 { width: 300px; height: 300px; }
+  .blob-2 { width: 250px; height: 250px; }
+  .blob-3 { width: 200px; height: 200px; }
+  .blob-4 { width: 180px; height: 180px; }
+}
