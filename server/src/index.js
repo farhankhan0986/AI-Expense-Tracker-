@@ -7,6 +7,7 @@ const rateLimit = require('express-rate-limit');
 const authRoutes = require('./routes/auth');
 const expenseRoutes = require('./routes/expenses');
 const analyticsRoutes = require('./routes/analytics');
+const budgetRoutes = require('./routes/budget');
 
 const app = express();
 
@@ -17,6 +18,7 @@ app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 app.use('/api/auth', authRoutes);
 app.use('/api/expenses', expenseRoutes);
 app.use('/api/analytics', analyticsRoutes);
+app.use('/api/budget', budgetRoutes);
 
 app.get('/api/health', (_req, res) => {
   res.json({ status: 'ok' });

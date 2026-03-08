@@ -242,3 +242,92 @@ exports.getBudgetAlerts = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch budget alerts.', details: err.message });
   }
 };
+
+exports.getDailyAnalytics = async (req, res) => {
+  try {
+    const days = Math.min(Math.max(parseInt(req.query.days || '14', 10), 7), 60);
+    const now = new Date();
+    now.setHours(23, 59, 59, 999);
+
+    const start = new Date(now);
+    start.setDate(start.getDate() - (days - 1));
+    start.setHours(0, 0, 0, 0);
+
+    const byDay = await Expense.aggregate([
+      {
+        $match: {
+          userId: new mongoose.Types.ObjectId(req.user.id),
+          date: { $gte: start, $lte: now },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: { $year: '$date' },
+            month: { $month: '$date' },
+            day: { $dayOfMonth: '$date' },
+          },
+          total: { $sum: '$amount' },
+          count: { $sum: 1 },
+        },
+      },
+      { $sort: { '_id.year': 1, '_id.month': 1, '_id.day': 1 } },
+    ]);
+
+    const totalsMap = new Map(
+      byDay.map((d) => {
+        const date = `${d._id.year}-${String(d._id.month).padStart(2, '0')}-${String(d._id.day).padStart(2, '0')}`;
+        return [date, { total: d.total, count: d.count }];
+      })
+    );
+
+    const daily = [];
+    const cursor = new Date(start);
+
+    while (cursor <= now) {
+      const key = cursor.toISOString().slice(0, 10);
+      const found = totalsMap.get(key) || { total: 0, count: 0 };
+      daily.push({ date: key, total: found.total, count: found.count });
+      cursor.setDate(cursor.getDate() + 1);
+    }
+
+    const avgDailySpend = daily.reduce((sum, d) => sum + d.total, 0) / daily.length;
+    const last7 = daily.slice(-7).reduce((sum, d) => sum + d.total, 0);
+    const previous7 = daily.slice(-14, -7).reduce((sum, d) => sum + d.total, 0);
+    const weeklyDelta = previous7 > 0 ? ((last7 - previous7) / previous7) * 100 : 0;
+
+    const forecast = Array.from({ length: 7 }, (_, i) => {
+      const date = new Date(now);
+      date.setDate(date.getDate() + i + 1);
+      return {
+        date: date.toISOString().slice(0, 10),
+        projectedTotal: Number(avgDailySpend.toFixed(2)),
+      };
+    });
+
+    const recommendations = [];
+    if (weeklyDelta > 15) {
+      recommendations.push('Daily spending is trending upward this week. Consider reducing discretionary categories.');
+    }
+    if (avgDailySpend > 0 && last7 / 7 > avgDailySpend * 1.1) {
+      recommendations.push('Recent 7-day average is above your baseline. Enable tighter budget notifications.');
+    }
+    if (recommendations.length === 0) {
+      recommendations.push('Spending momentum is stable. Keep current budget allocations and monitor anomalies.');
+    }
+
+    res.json({
+      windowDays: days,
+      summary: {
+        avgDailySpend: Number(avgDailySpend.toFixed(2)),
+        totalWindowSpend: Number(daily.reduce((sum, d) => sum + d.total, 0).toFixed(2)),
+        weeklyDelta: Number(weeklyDelta.toFixed(1)),
+      },
+      daily,
+      forecast,
+      recommendations,
+    });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch daily analytics.', details: err.message });
+  }
+};
