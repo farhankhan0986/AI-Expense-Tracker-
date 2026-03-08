@@ -242,3 +242,61 @@ exports.getBudgetAlerts = async (req, res) => {
     res.status(500).json({ error: 'Failed to fetch budget alerts.', details: err.message });
   }
 };
+
+exports.getDailyAnalytics = async (req, res) => {
+  try {
+    const now = new Date();
+    const thirtyDaysAgo = new Date(now.getFullYear(), now.getMonth(), now.getDate() - 29); // 30 days inclusive of today
+    
+    // Set to beginning of the day for strict matching
+    thirtyDaysAgo.setHours(0, 0, 0, 0);
+
+    const daily = await Expense.aggregate([
+      {
+        $match: {
+          userId: new mongoose.Types.ObjectId(req.user.id),
+          date: { $gte: thirtyDaysAgo },
+        },
+      },
+      {
+        $group: {
+          _id: {
+            year: { $year: '$date' },
+            month: { $month: '$date' },
+            day: { $dayOfMonth: '$date' }
+          },
+          total: { $sum: '$amount' },
+        },
+      },
+      {
+        $sort: { '_id.year': 1, '_id.month': 1, '_id.day': 1 },
+      },
+    ]);
+
+    // Build a contiguous 30-day map, so days with 0 spend are properly represented
+    const resultsMap = {};
+    for (let i = 0; i < 30; i++) {
+        const d = new Date(thirtyDaysAgo);
+        d.setDate(d.getDate() + i);
+        const key = `${d.getFullYear()}-${String(d.getMonth() + 1).padStart(2, '0')}-${String(d.getDate()).padStart(2, '0')}`;
+        resultsMap[key] = 0;
+    }
+
+    // Populate actual spending
+    daily.forEach(d => {
+        const key = `${d._id.year}-${String(d._id.month).padStart(2, '0')}-${String(d._id.day).padStart(2, '0')}`;
+        if (resultsMap[key] !== undefined) {
+           resultsMap[key] = d.total;
+        }
+    });
+
+    const output = Object.keys(resultsMap).map(k => ({
+        date: k,
+        total: resultsMap[k]
+    }));
+
+    res.json({ timeline: output });
+  } catch (err) {
+    res.status(500).json({ error: 'Failed to fetch daily analytics.', details: err.message });
+  }
+};

@@ -2,36 +2,11 @@ import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
 import { DollarSign, Wallet, Tag, Hash, ArrowRight } from 'lucide-react';
 import { Link } from 'react-router-dom';
-import {
-  BarChart, Bar, XAxis, YAxis, Tooltip, ResponsiveContainer, CartesianGrid,
-} from 'recharts';
 import { useAuth } from '../hooks/useAuth';
 import * as api from '../utils/api';
 import StatCard from '../components/StatCard';
 import BudgetAlert from '../components/BudgetAlert';
-
-/* Demo data for standalone viewing */
-const DEMO_EXPENSES = [
-  { _id: '1', description: 'Morning Coffee', category: 'Food', amount: 4.50, date: '2025-01-15' },
-  { _id: '2', description: 'Uber to Office', category: 'Transport', amount: 12.00, date: '2025-01-14' },
-  { _id: '3', description: 'Netflix Subscription', category: 'Entertainment', amount: 15.99, date: '2025-01-13' },
-  { _id: '4', description: 'Grocery Run', category: 'Food', amount: 67.30, date: '2025-01-12' },
-  { _id: '5', description: 'Electric Bill', category: 'Bills', amount: 89.00, date: '2025-01-11' },
-];
-
-const DEMO_CHART = [
-  { month: 'Aug', total: 1200 },
-  { month: 'Sep', total: 980 },
-  { month: 'Oct', total: 1450 },
-  { month: 'Nov', total: 1100 },
-  { month: 'Dec', total: 1350 },
-  { month: 'Jan', total: 870 },
-];
-
-const DEMO_ALERTS = [
-  { category: 'Food', spent: 420, limit: 500, percentage: 84 },
-  { category: 'Entertainment', spent: 210, limit: 200, percentage: 105 },
-];
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, ResponsiveContainer, AreaChart, Area } from 'recharts';
 
 const container = {
   hidden: {},
@@ -56,24 +31,26 @@ const CustomTooltip = ({ active, payload, label }) => {
 export default function Dashboard() {
   const { user } = useAuth();
   const [expenses, setExpenses] = useState([]);
-  const [chartData, setChartData] = useState(DEMO_CHART);
-  const [alerts, setAlerts] = useState(DEMO_ALERTS);
+  const [chartData, setChartData] = useState([]);
+  const [alerts, setAlerts] = useState([]);
+  const [dailyData, setDailyData] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const [expRes, trendRes, alertRes] = await Promise.allSettled([
+        const [expRes, trendRes, alertRes, dailyRes] = await Promise.allSettled([
           api.getExpenses(),
           api.getSpendingTrend(),
           api.getBudgetAlerts(),
+          api.getDailyAnalytics(),
         ]);
 
         if (expRes.status === 'fulfilled') {
           const list = expRes.value?.expenses || expRes.value || [];
-          setExpenses(list.length ? list : DEMO_EXPENSES);
+          setExpenses(list);
         } else {
-          setExpenses(DEMO_EXPENSES);
+          setExpenses([]);
         }
 
         if (trendRes.status === 'fulfilled' && Array.isArray(trendRes.value) && trendRes.value.length) {
@@ -83,8 +60,14 @@ export default function Dashboard() {
         if (alertRes.status === 'fulfilled' && Array.isArray(alertRes.value) && alertRes.value.length) {
           setAlerts(alertRes.value);
         }
+
+        if (dailyRes.status === 'fulfilled') {
+          const data = dailyRes.value?.timeline || dailyRes.value;
+          if (Array.isArray(data) && data.length) setDailyData(data);
+        }
       } catch {
-        setExpenses(DEMO_EXPENSES);
+        setExpenses([]);
+        setDailyData([]);
       } finally {
         setLoading(false);
       }
@@ -103,6 +86,29 @@ export default function Dashboard() {
         }, {})
       ).sort((a, b) => b[1] - a[1])[0]?.[0] || '—'
     : '—';
+
+  const categoriesData = expenses.length
+    ? Object.entries(
+        expenses.reduce((acc, e) => {
+          acc[e.category] = (acc[e.category] || 0) + e.amount;
+          return acc;
+        }, {})
+      ).map(([name, amount]) => {
+        const colors = {
+          Food: 'var(--accent-pink)',
+          Transport: 'var(--accent-blue)',
+          Entertainment: 'var(--accent-purple)',
+          Bills: 'var(--accent-teal)',
+          Shopping: 'var(--accent-orange)'
+        };
+        return { 
+          name, 
+          amount, 
+          percent: totalSpent ? (amount / totalSpent) : 0, 
+          color: colors[name] || 'var(--accent-purple)' 
+        };
+      })
+    : [];
 
   const firstName = user?.name?.split(' ')[0] || 'there';
 
@@ -127,48 +133,115 @@ export default function Dashboard() {
             <StatCard icon={Hash} label="Transactions" value={expenses.length} color="blue" />
           </motion.div>
 
-          {/* Chart + Recent */}
-          <motion.div className="cards-grid" variants={item} style={{ marginBottom: 32 }}>
-            <div className="glass-card chart-container">
-              <h4>Spending Trend</h4>
-              <ResponsiveContainer width="100%" height={220}>
-                <BarChart data={chartData}>
-                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
-                  <XAxis dataKey="month" tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
-                  <YAxis tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
-                  <Tooltip content={<CustomTooltip />} cursor={{ fill: 'rgba(168, 85, 247, 0.08)' }} />
-                  <Bar dataKey="total" fill="url(#barGradient)" radius={[6, 6, 0, 0]} />
-                  <defs>
-                    <linearGradient id="barGradient" x1="0" y1="0" x2="0" y2="1">
-                      <stop offset="0%" stopColor="#a855f7" />
-                      <stop offset="100%" stopColor="#ec4899" />
-                    </linearGradient>
-                  </defs>
-                </BarChart>
-              </ResponsiveContainer>
+          {/* Flat Table and Chart */}
+          <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: 32 }} variants={item}>
+            <div className="glass-card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>Spending Trend</h4>
+              </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Last 6 months</p>
+              
+              {chartData.length > 0 ? (
+                <div style={{ height: '300px', width: '100%' }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-glass-border)" vertical={false} />
+                      <XAxis dataKey="month" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} />
+                      <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} />
+                      <Tooltip content={<CustomTooltip />} cursor={{ fill: 'var(--bg-glass-hover)' }} />
+                      <Bar dataKey="total" fill="var(--text-primary)" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </div>
+              ) : (
+                <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+                  No trend data available.
+                </div>
+              )}
             </div>
 
-            <div className="glass-card" style={{ padding: 24 }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 20 }}>
-                <h4>Recent Expenses</h4>
+            <div className="glass-card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>Category Breakdown</h4>
                 <Link to="/expenses" className="btn btn-ghost btn-sm">
-                  View All <ArrowRight size={14} />
+                  View Data <ArrowRight size={14} />
                 </Link>
               </div>
-              <div style={{ display: 'flex', flexDirection: 'column', gap: 10 }}>
-                {expenses.slice(0, 5).map((exp) => (
-                  <div key={exp._id || exp.id} className="expense-item">
-                    <div className="expense-item-info">
-                      <div className="expense-item-desc">{exp.description}</div>
-                      <div className="expense-item-date">
-                        {new Date(exp.date).toLocaleDateString('en-US', { month: 'short', day: 'numeric' })}
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Distribution of expenses</p>
+              
+              {categoriesData.length > 0 ? (
+                <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
+                  {categoriesData.map((cat, i) => (
+                    <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: i < categoriesData.length - 1 ? '1px solid var(--bg-glass-border)' : 'none', paddingBottom: i < categoriesData.length - 1 ? '12px' : '0' }}>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
+                        <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: cat.color }}></div>
+                        <span style={{ fontWeight: 500 }}>{cat.name}</span>
+                      </div>
+                      <div style={{ textAlign: 'right' }}>
+                        <div style={{ fontWeight: 600 }}>${cat.amount.toFixed(2)}</div>
+                        <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{Math.round(cat.percent * 100)}%</div>
                       </div>
                     </div>
-                    <span className={`category-badge ${exp.category}`}>{exp.category}</span>
-                    <div className="expense-item-amount">-${exp.amount.toFixed(2)}</div>
-                  </div>
-                ))}
+                  ))}
+                </div>
+              ) : (
+                <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-muted)' }}>
+                  No categorical data available.
+                </div>
+              )}
+            </div>
+          </motion.div>
+
+          {/* Daily Analysis Flow */}
+          <motion.div variants={item} style={{ marginBottom: 32 }}>
+            <div className="glass-card" style={{ padding: '24px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+                <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>30-Day Daily Analysis</h4>
+                <Link to="/analytics" className="btn btn-ghost btn-sm">
+                  Full Analytics <ArrowRight size={14} />
+                </Link>
               </div>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Your spending over the last 30 days</p>
+
+              {dailyData.length > 0 ? (
+                <div style={{ height: '300px', width: '100%' }}>
+                  <ResponsiveContainer width="100%" height="100%">
+                    <AreaChart data={dailyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                      <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-glass-border)" vertical={false} />
+                      <XAxis 
+                        dataKey="date" 
+                        tick={{ fill: 'var(--text-muted)', fontSize: 10 }} 
+                        axisLine={false} 
+                        tickLine={false}
+                        tickFormatter={(val) => {
+                          const [, m, d] = val.split('-');
+                          return `${m}/${d}`;
+                        }}
+                      />
+                      <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} />
+                      <Tooltip content={<CustomTooltip />} />
+                      <defs>
+                        <linearGradient id="colorDailyDash" x1="0" y1="0" x2="0" y2="1">
+                          <stop offset="5%" stopColor="var(--accent-teal)" stopOpacity={0.15}/>
+                          <stop offset="95%" stopColor="var(--accent-teal)" stopOpacity={0}/>
+                        </linearGradient>
+                      </defs>
+                      <Area 
+                        type="monotone" 
+                        dataKey="total" 
+                        stroke="var(--accent-teal)" 
+                        strokeWidth={2}
+                        fillOpacity={1} 
+                        fill="url(#colorDailyDash)" 
+                      />
+                    </AreaChart>
+                  </ResponsiveContainer>
+                </div>
+              ) : (
+                <div style={{ height: '300px', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+                  No daily data available.
+                </div>
+              )}
             </div>
           </motion.div>
 

@@ -91,6 +91,10 @@ export async function getSpendingTrend() {
   return request('/analytics/trends');
 }
 
+export async function getDailyAnalytics() {
+  return request('/analytics/daily');
+}
+
 export async function getSavingSuggestions() {
   return request('/analytics/suggestions');
 }

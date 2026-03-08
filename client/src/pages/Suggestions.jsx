@@ -9,43 +9,13 @@ import {
   Repeat,
   PiggyBank,
   ArrowDownRight,
+  DatabaseZap
 } from 'lucide-react';
 import * as api from '../utils/api';
 
 const ICONS = [PiggyBank, TrendingDown, ShoppingCart, Utensils, Zap, Repeat, ArrowDownRight, Lightbulb];
 
-const DEMO_SUGGESTIONS = [
-  {
-    title: 'Cut Food Delivery Spending',
-    description: 'You spent $180 on food delivery last month — 40% more than average. Cooking 3 more meals per week could save ~$120/month.',
-    type: 'saving',
-  },
-  {
-    title: 'Subscription Audit',
-    description: 'You have 5 active subscriptions totalling $67/month. Consider cancelling services you haven\'t used in 30+ days.',
-    type: 'insight',
-  },
-  {
-    title: 'Transport Optimisation',
-    description: 'Switching 2 weekly Uber rides to public transit could save $60/month based on your spending patterns.',
-    type: 'saving',
-  },
-  {
-    title: 'Shopping Trend Alert',
-    description: 'Shopping expenses increased 25% compared to last month. Set a weekly spending cap to stay on track.',
-    type: 'insight',
-  },
-  {
-    title: 'Utilities Saving',
-    description: 'Your electricity bill is $30 above the seasonal average. Switching to LED bulbs and off-peak usage could reduce costs.',
-    type: 'saving',
-  },
-  {
-    title: 'Emergency Fund Progress',
-    description: 'Based on your remaining budget, you could save $350 this month. That\'s $4,200/year towards your emergency fund.',
-    type: 'insight',
-  },
-];
+const DEMO_SUGGESTIONS = [];
 
 const container = {
   hidden: {},
@@ -68,7 +38,7 @@ export default function Suggestions() {
         const list = data?.suggestions || data;
         if (Array.isArray(list) && list.length) setSuggestions(list);
       } catch {
-        // Use demo data
+        setSuggestions([]);
       } finally {
         setLoading(false);
       }
@@ -79,11 +49,15 @@ export default function Suggestions() {
   return (
     <div className="page-wrapper">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-        <h2 style={{ marginBottom: 4 }}>
-          <Lightbulb size={28} style={{ display: 'inline', marginRight: 8, color: 'var(--accent-orange)' }} />
-          Smart Suggestions
+        <h2 style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <DatabaseZap size={28} className="gradient-text" />
+          Neural Category Nexus
         </h2>
-        <p style={{ marginBottom: 32 }}>AI-powered insights to help you save more</p>
+        <p style={{ marginBottom: 32 }}>Manage dimensions and receive AI-driven structural recommendations</p>
+      </motion.div>
+
+      <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ delay: 0.1, duration: 0.4 }} style={{ marginTop: '1rem' }}>
+        <h3 style={{ fontFamily: 'var(--font-display)', marginBottom: '1rem', letterSpacing: '0px' }}>Global Savings Intelligence</h3>
       </motion.div>
 
       {loading ? (
@@ -145,35 +119,11 @@ export default function Suggestions() {
               </motion.div>
             );
           })}
-
-          {/* Spending insights summary */}
-          <motion.div
-            variants={item}
-            className="glass-card"
-            style={{
-              padding: '32px',
-              textAlign: 'center',
-              background: 'linear-gradient(135deg, rgba(168, 85, 247, 0.08), rgba(45, 212, 191, 0.08))',
-              border: '1px solid rgba(168, 85, 247, 0.15)',
-            }}
-          >
-            <PiggyBank size={36} style={{ color: 'var(--accent-teal)', marginBottom: 12 }} />
-            <h3 style={{ marginBottom: 8 }}>Potential Monthly Savings</h3>
-            <div
-              style={{
-                fontFamily: 'var(--font-display)',
-                fontSize: '2.5rem',
-                fontWeight: 700,
-                marginBottom: 8,
-              }}
-              className="gradient-text-secondary"
-            >
-              $240
+          {suggestions.length === 0 && (
+            <div style={{ padding: '24px 0', textAlign: 'center', color: 'var(--text-muted)' }}>
+              No intelligence suggestions available at this time.
             </div>
-            <p style={{ fontSize: '0.85rem' }}>
-              Based on the suggestions above, you could save up to $240 each month
-            </p>
-          </motion.div>
+          )}
         </motion.div>
       )}
     </div>

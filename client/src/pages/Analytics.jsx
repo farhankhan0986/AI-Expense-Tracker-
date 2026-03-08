@@ -4,28 +4,14 @@ import {
   PieChart, Pie, Cell, Tooltip as ReTooltip, ResponsiveContainer, Legend,
   BarChart, Bar, XAxis, YAxis, CartesianGrid,
   LineChart, Line, Tooltip as LineTooltip,
+  AreaChart, Area
 } from 'recharts';
 import * as api from '../utils/api';
 
-const COLORS = ['#a855f7', '#ec4899', '#2dd4bf', '#3b82f6', '#f97316', '#34d399', '#60a5fa', '#6b6a7d'];
+const COLORS = ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#6b7280', '#000000'];
 
-const DEMO_CATEGORIES = [
-  { name: 'Food', value: 420 },
-  { name: 'Transport', value: 180 },
-  { name: 'Entertainment', value: 210 },
-  { name: 'Utilities', value: 310 },
-  { name: 'Shopping', value: 150 },
-  { name: 'Health', value: 90 },
-];
-
-const DEMO_TREND = [
-  { month: 'Aug', total: 1200 },
-  { month: 'Sep', total: 980 },
-  { month: 'Oct', total: 1450 },
-  { month: 'Nov', total: 1100 },
-  { month: 'Dec', total: 1350 },
-  { month: 'Jan', total: 870 },
-];
+const DEMO_CATEGORIES = [];
+const DEMO_TREND = [];
 
 const GlassTooltip = ({ active, payload, label }) => {
   if (!active || !payload?.length) return null;
@@ -49,14 +35,16 @@ const item = {
 export default function Analytics() {
   const [categories, setCategories] = useState(DEMO_CATEGORIES);
   const [trend, setTrend] = useState(DEMO_TREND);
+  const [daily, setDaily] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const [monthlyRes, trendRes] = await Promise.allSettled([
+        const [monthlyRes, trendRes, dailyRes] = await Promise.allSettled([
           api.getMonthlyAnalytics(),
           api.getSpendingTrend(),
+          api.getDailyAnalytics(),
         ]);
 
         if (monthlyRes.status === 'fulfilled') {
@@ -68,8 +56,15 @@ export default function Analytics() {
           const data = trendRes.value?.trend || trendRes.value;
           if (Array.isArray(data) && data.length) setTrend(data);
         }
+        
+        if (dailyRes.status === 'fulfilled') {
+          const data = dailyRes.value?.timeline || dailyRes.value;
+          if (Array.isArray(data) && data.length) setDaily(data);
+        }
       } catch {
-        // Use demo data
+        setCategories([]);
+        setTrend([]);
+        setDaily([]);
       } finally {
         setLoading(false);
       }
@@ -173,21 +168,61 @@ export default function Analytics() {
                   <XAxis dataKey="month" tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
                   <YAxis tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
                   <LineTooltip content={<GlassTooltip />} />
-                  <defs>
-                    <linearGradient id="lineGrad" x1="0" y1="0" x2="1" y2="0">
-                      <stop offset="0%" stopColor="#a855f7" />
-                      <stop offset="100%" stopColor="#2dd4bf" />
-                    </linearGradient>
-                  </defs>
                   <Line
                     type="monotone"
                     dataKey="total"
-                    stroke="url(#lineGrad)"
+                    stroke="#2563eb"
                     strokeWidth={3}
-                    dot={{ r: 5, fill: '#a855f7', stroke: '#0a0a1a', strokeWidth: 2 }}
-                    activeDot={{ r: 7, fill: '#ec4899' }}
+                    dot={{ r: 4, fill: '#2563eb', stroke: 'none' }}
+                    activeDot={{ r: 6, fill: '#1d4ed8' }}
                   />
                 </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+
+          {/* Daily Analysis chart */}
+          <motion.div variants={item} style={{ marginTop: 32 }}>
+            <div className="glass-card chart-container">
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: 16 }}>
+                <h4>30-Day Daily Analysis</h4>
+              </div>
+              <ResponsiveContainer width="100%" height={280}>
+                {daily.length > 0 ? (
+                  <AreaChart data={daily} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
+                    <CartesianGrid strokeDasharray="3 3" stroke="rgba(0,0,0,0.05)" vertical={false} />
+                    <XAxis 
+                      dataKey="date" 
+                      tick={{ fill: 'var(--text-muted)', fontSize: 10 }} 
+                      axisLine={false} 
+                      tickLine={false}
+                      tickFormatter={(val) => {
+                        const [, m, d] = val.split('-');
+                        return `${m}/${d}`;
+                      }}
+                    />
+                    <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} />
+                    <LineTooltip content={<GlassTooltip />} />
+                    <defs>
+                      <linearGradient id="colorDaily" x1="0" y1="0" x2="0" y2="1">
+                        <stop offset="5%" stopColor="var(--accent-teal)" stopOpacity={0.4}/>
+                        <stop offset="95%" stopColor="var(--accent-teal)" stopOpacity={0}/>
+                      </linearGradient>
+                    </defs>
+                    <Area 
+                      type="monotone" 
+                      dataKey="total" 
+                      stroke="var(--accent-teal)" 
+                      strokeWidth={2}
+                      fillOpacity={1} 
+                      fill="url(#colorDaily)" 
+                    />
+                  </AreaChart>
+                ) : (
+                  <div style={{ height: '100%', display: 'flex', alignItems: 'center', justifyContent: 'center', color: 'var(--text-muted)' }}>
+                    No daily analytics data available.
+                  </div>
+                )}
               </ResponsiveContainer>
             </div>
           </motion.div>

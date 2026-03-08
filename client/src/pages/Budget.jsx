@@ -1,21 +1,22 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
-import { Wallet, Plus, Save } from 'lucide-react';
+import { Wallet, Plus, Save, Activity } from 'lucide-react';
 import * as api from '../utils/api';
 import BudgetAlert from '../components/BudgetAlert';
+import BudgetBuilder from '../components/BudgetBuilder';
 
 const CATEGORIES = ['Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Other'];
 
 const DEMO_BUDGETS = {
-  Food: { limit: 500, spent: 420 },
-  Transport: { limit: 200, spent: 145 },
-  Entertainment: { limit: 200, spent: 210 },
-  Bills: { limit: 350, spent: 310 },
-  Shopping: { limit: 300, spent: 150 },
-  Health: { limit: 150, spent: 90 },
-  Education: { limit: 100, spent: 30 },
-  Travel: { limit: 200, spent: 60 },
-  Other: { limit: 200, spent: 40 },
+  Food: { limit: 0, spent: 0 },
+  Transport: { limit: 0, spent: 0 },
+  Entertainment: { limit: 0, spent: 0 },
+  Bills: { limit: 0, spent: 0 },
+  Shopping: { limit: 0, spent: 0 },
+  Health: { limit: 0, spent: 0 },
+  Education: { limit: 0, spent: 0 },
+  Travel: { limit: 0, spent: 0 },
+  Other: { limit: 0, spent: 0 },
 };
 
 const item = {
@@ -72,7 +73,8 @@ export default function Budget() {
           setAlerts(alertsRes.value);
         }
       } catch {
-        // Use demo data
+        setBudgets(DEMO_BUDGETS);
+        setAlerts([]);
       } finally {
         setLoading(false);
       }
@@ -110,8 +112,11 @@ export default function Budget() {
   return (
     <div className="page-wrapper">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
-        <h2 style={{ marginBottom: 4 }}>Budget</h2>
-        <p style={{ marginBottom: 32 }}>Set limits and track spending per category</p>
+        <h2 style={{ marginBottom: 4, display: 'flex', alignItems: 'center', gap: '10px' }}>
+          <Activity size={28} className="gradient-text" />
+          Budget Allocation
+        </h2>
+        <p style={{ marginBottom: 32 }}>Resource allocation and limits</p>
       </motion.div>
 
       {loading ? (
@@ -150,9 +155,14 @@ export default function Budget() {
                 onClick={handleSaveLimit}
                 disabled={!editCategory || !editValue || saving}
               >
-                <Save size={14} /> Save
+                <Save size={14} /> Commit Sequence
               </button>
             </div>
+          </motion.div>
+          
+          {/* Budget Builder interactive bar */}
+          <motion.div variants={item} style={{ marginBottom: 32 }}>
+            <BudgetBuilder budgets={budgets} />
           </motion.div>
 
           {/* Budget progress bars */}

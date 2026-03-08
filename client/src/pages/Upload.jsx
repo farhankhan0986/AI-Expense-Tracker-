@@ -46,22 +46,12 @@ export default function Upload() {
     try {
       const data = await api.uploadStatement(file);
       setProgress(100);
-      setResult(data?.expenses || data || [
-        { description: 'Starbucks', category: 'food', amount: 5.40 },
-        { description: 'Metro Pass', category: 'transport', amount: 45.00 },
-        { description: 'Amazon Order', category: 'shopping', amount: 67.99 },
-        { description: 'Spotify', category: 'entertainment', amount: 9.99 },
-      ]);
+      setResult(data?.expenses || data || []);
     } catch (err) {
       setError(err.message);
-      // Show demo results on failure
+      // Remove demo results on failure
       setProgress(100);
-      setResult([
-        { description: 'Starbucks Coffee', category: 'food', amount: 5.40 },
-        { description: 'Metro Card Top-up', category: 'transport', amount: 45.00 },
-        { description: 'Amazon Purchase', category: 'shopping', amount: 67.99 },
-        { description: 'Spotify Premium', category: 'entertainment', amount: 9.99 },
-      ]);
+      setResult([]);
     } finally {
       clearInterval(progressInterval);
       setUploading(false);

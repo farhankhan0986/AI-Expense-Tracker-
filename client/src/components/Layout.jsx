@@ -14,6 +14,8 @@ import {
 } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import AnimatedBackground from './AnimatedBackground';
+import SecurityShield from './SecurityShield';
+import NotificationSystem from './NotificationSystem';
 
 const NAV_LINKS = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
@@ -43,6 +45,7 @@ export default function Layout() {
   return (
     <>
       <AnimatedBackground />
+      <NotificationSystem />
 
       {/* Mobile header */}
       <div className="mobile-header">
@@ -101,6 +104,8 @@ export default function Layout() {
             <LogOut size={18} />
           </button>
         </div>
+        
+        <SecurityShield status="secure" />
       </aside>
 
       {/* Main content */}

@@ -3,17 +3,10 @@ import { motion, AnimatePresence } from 'framer-motion';
 import { Search, Trash2, Filter, Receipt } from 'lucide-react';
 import * as api from '../utils/api';
 import ExpenseForm from '../components/ExpenseForm';
+import DataPod from '../components/DataPod';
+import InsightsSidebar from '../components/InsightsSidebar';
 
-const DEMO_EXPENSES = [
-  { _id: '1', description: 'Morning Coffee', category: 'Food', amount: 4.50, date: '2025-01-15' },
-  { _id: '2', description: 'Uber to Office', category: 'Transport', amount: 12.00, date: '2025-01-14' },
-  { _id: '3', description: 'Netflix Subscription', category: 'Entertainment', amount: 15.99, date: '2025-01-13' },
-  { _id: '4', description: 'Grocery Run', category: 'Food', amount: 67.30, date: '2025-01-12' },
-  { _id: '5', description: 'Electric Bill', category: 'Bills', amount: 89.00, date: '2025-01-11' },
-  { _id: '6', description: 'New Sneakers', category: 'Shopping', amount: 149.99, date: '2025-01-10' },
-  { _id: '7', description: 'Pharmacy', category: 'Health', amount: 23.40, date: '2025-01-09' },
-  { _id: '8', description: 'Online Course', category: 'Education', amount: 29.99, date: '2025-01-08' },
-];
+const DEMO_EXPENSES = [];
 
 const CATEGORIES = ['all', 'Food', 'Transport', 'Shopping', 'Entertainment', 'Bills', 'Health', 'Education', 'Travel', 'Other'];
 
@@ -29,9 +22,9 @@ export default function Expenses() {
     try {
       const data = await api.getExpenses();
       const list = data?.expenses || data || [];
-      setExpenses(list.length ? list : DEMO_EXPENSES);
+      setExpenses(list);
     } catch {
-      setExpenses(DEMO_EXPENSES);
+      setExpenses([]);
     } finally {
       setLoading(false);
     }
@@ -82,101 +75,90 @@ export default function Expenses() {
         <p style={{ marginBottom: 28 }}>Track and manage every transaction</p>
       </motion.div>
 
-      {/* Add form */}
-      <motion.div
-        initial={{ opacity: 0, y: 15 }}
-        animate={{ opacity: 1, y: 0 }}
-        transition={{ duration: 0.4, delay: 0.1 }}
-        style={{ marginBottom: 32 }}
-      >
-        <ExpenseForm onSubmit={handleAdd} loading={adding} />
-      </motion.div>
-
-      {/* Filters */}
-      <motion.div
-        initial={{ opacity: 0 }}
-        animate={{ opacity: 1 }}
-        transition={{ delay: 0.2 }}
-        style={{ display: 'flex', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}
-      >
-        <div className="search-bar" style={{ flex: '1 1 240px' }}>
-          <Search size={16} className="search-bar-icon" />
-          <input
-            className="form-input"
-            type="text"
-            placeholder="Search expenses..."
-            value={search}
-            onChange={(e) => setSearch(e.target.value)}
-            style={{ paddingLeft: 42 }}
-          />
-        </div>
-        <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
-          <Filter size={16} style={{ color: 'var(--text-muted)' }} />
-          <select
-            className="form-select"
-            value={categoryFilter}
-            onChange={(e) => setCategoryFilter(e.target.value)}
-            style={{ minWidth: 140 }}
+      {/* Main Grid for Ledger and Insights */}
+      <div className="ledger-layout" style={{ display: 'grid', gridTemplateColumns: '1fr 300px', gap: '32px' }}>
+        
+        {/* Ledger Column */}
+        <div>
+          {/* Add form */}
+          <motion.div
+            initial={{ opacity: 0, y: 15 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.4, delay: 0.1 }}
+            style={{ marginBottom: 32 }}
           >
-            {CATEGORIES.map((c) => (
-              <option key={c} value={c}>
-                {c === 'all' ? 'All Categories' : c}
-              </option>
-            ))}
-          </select>
-        </div>
-      </motion.div>
+            <ExpenseForm onSubmit={handleAdd} loading={adding} />
+          </motion.div>
 
-      {/* Expense list */}
-      {loading ? (
-        <div className="loading-container"><div className="loading-spinner" /></div>
-      ) : filtered.length === 0 ? (
-        <div className="empty-state">
-          <Receipt size={48} className="empty-state-icon" />
-          <p>No expenses found</p>
-        </div>
-      ) : (
-        <motion.div
-          style={{ display: 'flex', flexDirection: 'column', gap: 8 }}
-          initial="hidden"
-          animate="show"
-          variants={{ hidden: {}, show: { transition: { staggerChildren: 0.04 } } }}
-        >
-          <AnimatePresence>
-            {filtered.map((exp) => (
-              <motion.div
-                key={exp._id || exp.id}
-                className="expense-item"
-                variants={{
-                  hidden: { opacity: 0, x: -10 },
-                  show: { opacity: 1, x: 0 },
-                }}
-                exit={{ opacity: 0, x: 20 }}
-                layout
+          {/* Filters */}
+          <motion.div
+            initial={{ opacity: 0 }}
+            animate={{ opacity: 1 }}
+            transition={{ delay: 0.2 }}
+            style={{ display: 'flex', gap: 12, marginBottom: 20, flexWrap: 'wrap' }}
+          >
+            <div className="search-bar" style={{ flex: '1 1 240px' }}>
+              <Search size={16} className="search-bar-icon" />
+              <input
+                className="form-input"
+                type="text"
+                placeholder="Search databanks..."
+                value={search}
+                onChange={(e) => setSearch(e.target.value)}
+                style={{ paddingLeft: 42, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-glass-border)' }}
+              />
+            </div>
+            <div style={{ display: 'flex', alignItems: 'center', gap: 8 }}>
+              <Filter size={16} style={{ color: 'var(--text-muted)' }} />
+              <select
+                className="form-select"
+                value={categoryFilter}
+                onChange={(e) => setCategoryFilter(e.target.value)}
+                style={{ minWidth: 140, background: 'rgba(255,255,255,0.03)', border: '1px solid var(--bg-glass-border)' }}
               >
-                <div className="expense-item-info">
-                  <div className="expense-item-desc">{exp.description}</div>
-                  <div className="expense-item-date">
-                    {new Date(exp.date).toLocaleDateString('en-US', {
-                      weekday: 'short', month: 'short', day: 'numeric',
-                    })}
-                  </div>
-                </div>
-                <span className={`category-badge ${exp.category}`}>{exp.category}</span>
-                <div className="expense-item-amount">-${exp.amount.toFixed(2)}</div>
-                <button
-                  className="btn btn-icon btn-danger btn-sm"
-                  onClick={() => handleDelete(exp._id || exp.id)}
-                  title="Delete expense"
-                  aria-label={`Delete ${exp.description}`}
-                >
-                  <Trash2 size={16} />
-                </button>
+                {CATEGORIES.map((c) => (
+                  <option key={c} value={c}>
+                    {c === 'all' ? 'All Data' : c}
+                  </option>
+                ))}
+              </select>
+            </div>
+          </motion.div>
+
+          {/* Scrolling LED display timeline */}
+          {loading ? (
+            <div className="loading-container"><div className="loading-spinner" /></div>
+          ) : filtered.length === 0 ? (
+            <div className="empty-state">
+              <Receipt size={48} className="empty-state-icon" />
+              <p>No transaction records found in database.</p>
+            </div>
+          ) : (
+            <div style={{ position: 'relative' }}>
+              {/* Timeline center line running down */}
+              <div style={{ position: 'absolute', left: '44px', top: '10px', bottom: '10px', width: '2px', background: 'rgba(255,255,255,0.05)', zIndex: 0 }} />
+              
+              <motion.div
+                style={{ display: 'flex', flexDirection: 'column', gap: 8, position: 'relative', zIndex: 1 }}
+                initial="hidden"
+                animate="show"
+                variants={{ hidden: {}, show: { transition: { staggerChildren: 0.08 } } }}
+              >
+                <AnimatePresence>
+                  {filtered.map((exp) => (
+                    <DataPod key={exp._id || exp.id} expense={exp} onDelete={handleDelete} />
+                  ))}
+                </AnimatePresence>
               </motion.div>
-            ))}
-          </AnimatePresence>
-        </motion.div>
-      )}
+            </div>
+          )}
+        </div>
+
+        {/* Sidebar Column */}
+        <div className="insights-sidebar">
+          <InsightsSidebar />
+        </div>
+      </div>
 
       {/* Feedback toast */}
       <AnimatePresence>
