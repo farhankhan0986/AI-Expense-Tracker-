@@ -5,6 +5,7 @@ const {
   getSpendingTrend,
   getSavingSuggestions,
   getBudgetAlerts,
+  getDailyAnalytics,
 } = require('../controllers/analyticsController');
 
 const router = Router();
@@ -15,5 +16,6 @@ router.get('/monthly', getMonthlyAnalytics);
 router.get('/trends', getSpendingTrend);
 router.get('/suggestions', getSavingSuggestions);
 router.get('/alerts', getBudgetAlerts);
+router.get('/daily', getDailyAnalytics);
 
 module.exports = router;

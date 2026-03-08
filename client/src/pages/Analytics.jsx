@@ -49,24 +49,33 @@ const item = {
 export default function Analytics() {
   const [categories, setCategories] = useState(DEMO_CATEGORIES);
   const [trend, setTrend] = useState(DEMO_TREND);
+  const [daily, setDaily] = useState([]);
   const [loading, setLoading] = useState(true);
 
   useEffect(() => {
     async function load() {
       try {
-        const [monthlyRes, trendRes] = await Promise.allSettled([
+        const [monthlyRes, trendRes, dailyRes] = await Promise.allSettled([
           api.getMonthlyAnalytics(),
           api.getSpendingTrend(),
+          api.getDailyAnalytics(14),
         ]);
 
         if (monthlyRes.status === 'fulfilled') {
-          const data = monthlyRes.value?.categories || monthlyRes.value;
-          if (Array.isArray(data) && data.length) setCategories(data);
+          const data = monthlyRes.value?.breakdown || [];
+          if (Array.isArray(data) && data.length) {
+            setCategories(data.map((d) => ({ name: d.category, value: d.total })));
+          }
         }
 
         if (trendRes.status === 'fulfilled') {
           const data = trendRes.value?.trend || trendRes.value;
           if (Array.isArray(data) && data.length) setTrend(data);
+        }
+
+        if (dailyRes.status === 'fulfilled') {
+          const data = dailyRes.value?.daily || [];
+          if (Array.isArray(data) && data.length) setDaily(data.map((d) => ({ ...d, shortDate: d.date.slice(5) })));
         }
       } catch {
         // Use demo data
@@ -78,6 +87,7 @@ export default function Analytics() {
   }, []);
 
   const totalSpent = categories.reduce((s, c) => s + c.value, 0);
+  const highestCategory = [...categories].sort((a, b) => b.value - a.value)[0]?.name || '—';
 
   return (
     <div className="page-wrapper">
@@ -111,7 +121,7 @@ export default function Analytics() {
             <div className="glass-card stat-card">
               <div className="stat-card-label">Highest</div>
               <div className="stat-card-value">
-                {categories.sort((a, b) => b.value - a.value)[0]?.name || '—'}
+                {highestCategory}
               </div>
             </div>
           </motion.div>
@@ -187,6 +197,21 @@ export default function Analytics() {
                     dot={{ r: 5, fill: '#a855f7', stroke: '#0a0a1a', strokeWidth: 2 }}
                     activeDot={{ r: 7, fill: '#ec4899' }}
                   />
+                </LineChart>
+              </ResponsiveContainer>
+            </div>
+          </motion.div>
+
+          <motion.div variants={item} style={{ marginTop: 24 }}>
+            <div className="glass-card chart-container">
+              <h4>Daily Spend (14 Days)</h4>
+              <ResponsiveContainer width="100%" height={220}>
+                <LineChart data={daily}>
+                  <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" />
+                  <XAxis dataKey="shortDate" tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
+                  <YAxis tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
+                  <LineTooltip content={<GlassTooltip />} />
+                  <Line type="monotone" dataKey="total" stroke="#22d3ee" strokeWidth={2} dot={false} />
                 </LineChart>
               </ResponsiveContainer>
             </div>

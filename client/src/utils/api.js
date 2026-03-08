@@ -91,6 +91,10 @@ export async function getSpendingTrend() {
   return request('/analytics/trends');
 }
 
+
+export async function getDailyAnalytics(days = 14) {
+  return request(`/analytics/daily?days=${encodeURIComponent(days)}`);
+}
 export async function getSavingSuggestions() {
   return request('/analytics/suggestions');
 }
