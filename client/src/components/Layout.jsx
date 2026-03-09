@@ -53,10 +53,14 @@ export default function Layout() {
         <button className="hamburger-btn" onClick={() => setSidebarOpen(!sidebarOpen)} aria-label="Toggle menu">
           {sidebarOpen ? <X size={22} /> : <Menu size={22} />}
         </button>
-        <span className="sidebar-brand-text">
-          <Sparkles size={16} style={{ display: 'inline', marginRight: 6 }} />
+        <div className="flex items-center gap-2">
+
+          <div style={{ textAlign: 'center', marginBottom: '8px' }}>
+            <img src={logo} alt="Logo" width="40" height="40" />
+          </div>
+
           SpendLens
-        </span>
+        </div>
         <div style={{ width: 38 }} />
       </div>
 
@@ -68,9 +72,9 @@ export default function Layout() {
       />
 
       {/* Sidebar */}
-      <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
-        <div className="sidebar-brand">
-          <div style={{ textAlign: 'center', marginBottom: '' }}>
+      <aside className={`sidebar mt-14 ${sidebarOpen ? 'open' : ''}`}>
+        <div className="lg:flex hidden items-center gap-3 pt-7 pl-7 pb-5 ">
+          <div style={{ textAlign: 'center', marginBottom: '' }} >
             <img src={logo} alt="Logo" width="40" height="40" />
           </div>
           <span className="sidebar-brand-text">SpendLens</span>
@@ -90,7 +94,7 @@ export default function Layout() {
           ))}
         </nav>
 
-        <div className="sidebar-user">
+        <div className="sidebar-user" style={{ marginBottom: '60px' }}>
           <div className="sidebar-avatar">{initials}</div>
           <div className="sidebar-user-info">
             <div className="sidebar-user-name">{user?.name || 'User'}</div>

@@ -76,7 +76,7 @@ export default function Landing() {
       {/* Hero */}
       <section className="flex flex-col lg:flex-row justify-center items-center  mt-20 mb-20 gap-20">
         <motion.div
-          className="landing-hero-content ml-16"
+          className="landing-hero-content ml-12"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
