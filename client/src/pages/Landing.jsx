@@ -74,9 +74,9 @@ export default function Landing() {
       </header>
 
       {/* Hero */}
-      <section className="flex justify-center items-center mt-20 mb-20 gap-20">
+      <section className="flex flex-col lg:flex-row justify-center items-center  mt-20 mb-20 gap-20">
         <motion.div
-          className="landing-hero-content"
+          className="landing-hero-content ml-16"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
@@ -110,7 +110,7 @@ export default function Landing() {
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.8 }}
         >
-          <div className="hero-mockup glass-card p-6 rounded-2xl w-[700px]">
+          <div className="hero-mockup glass-card p-6 rounded-2xl lg:w-[700px] w-[400px]">
 
             {/* Total Spending */}
             <div className="mb-5">
