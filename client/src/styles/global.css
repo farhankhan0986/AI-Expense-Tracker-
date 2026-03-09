@@ -4,6 +4,10 @@
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
 
 :root {
   /* Background & surfaces (Light / Default) */
@@ -17,6 +21,8 @@
   /* Accent colors (Clean & Flat) */
   --accent-purple: #7c3aed;
   --accent-purple-dim: rgba(124, 58, 237, 0.1);
+  --accent-white: #ffffff;  
+  --accent-white-dim: rgba(255, 255, 255, 0.1); 
   --accent-teal: #0d9488;
   --accent-teal-dim: rgba(13, 148, 136, 0.1);
   --accent-pink: #e11d48;

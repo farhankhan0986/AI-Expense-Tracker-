@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { User, Mail, Lock, Wallet, Sparkles } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import AnimatedBackground from '../components/AnimatedBackground';
+import logo from '../assests/logo.svg'; 
 
 export default function Register() {
   const { register } = useAuth();
@@ -49,8 +50,10 @@ export default function Register() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <Sparkles size={28} style={{ color: 'var(--accent-purple)' }} />
+        <div className='flex justify-center items-center'>
+        <div style={{ textAlign: 'center', marginBottom: '8px' }}>  
+          <img src={logo} alt="Logo" width="60" height="60" />
+        </div>
         </div>
         <h1 className="auth-title" style={{ textAlign: 'center' }}>
           Create your account
@@ -126,7 +129,7 @@ export default function Register() {
           <div className="form-group">
             <label className="form-label" htmlFor="reg-budget">
               <Wallet size={14} style={{ display: 'inline', marginRight: 6 }} />
-              Monthly Budget ($)
+              Monthly Budget (₹)
             </label>
             <input
               id="reg-budget"

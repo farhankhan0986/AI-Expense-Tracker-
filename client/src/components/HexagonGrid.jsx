@@ -33,7 +33,7 @@ export default function HexagonGrid({ categories }) {
                   {icons[cat.name] || icons.default}
                 </div>
                 <span className="hex-name" style={{ fontFamily: 'var(--font-display)', fontSize: '0.85rem' }}>{cat.name}</span>
-                <span className="hex-amount" style={{ fontSize: '1.1rem', fontWeight: 600, marginTop: '4px' }}>${cat.amount.toFixed(0)}</span>
+                <span className="hex-amount" style={{ fontSize: '1.1rem', fontWeight: 600, marginTop: '4px' }}>₹{cat.amount.toFixed(0)}</span>
               </div>
             </motion.div>
           </div>
@@ -57,7 +57,7 @@ export default function HexagonGrid({ categories }) {
                 {activeCat} Details
               </h3>
               <span style={{ fontSize: '1.25rem', fontWeight: 700 }}>
-                ${categories.find(c => c.name === activeCat)?.amount.toFixed(2)}
+                ₹{categories.find(c => c.name === activeCat)?.amount.toFixed(2)}
               </span>
             </div>
             
@@ -68,7 +68,7 @@ export default function HexagonGrid({ categories }) {
               </div>
               <div className="glass-card" style={{ padding: '1rem', background: 'rgba(0,0,0,0.2)' }}>
                 <div style={{ fontSize: '0.8rem', color: 'var(--text-secondary)' }}>AI Forecast</div>
-                <div style={{ color: 'var(--accent-orange)' }}>Expected: ${((categories.find(c => c.name === activeCat)?.amount || 0) * 1.2).toFixed(0)}</div>
+                <div style={{ color: 'var(--accent-orange)' }}>Expected: ₹{((categories.find(c => c.name === activeCat)?.amount || 0) * 1.2).toFixed(0)}</div>
               </div>
             </div>
             

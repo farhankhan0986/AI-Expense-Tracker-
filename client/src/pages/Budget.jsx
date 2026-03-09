@@ -143,7 +143,7 @@ export default function Budget() {
               <input
                 className="form-input"
                 type="number"
-                placeholder="Limit ($)"
+                placeholder="Limit (₹)"
                 min="0"
                 step="10"
                 value={editValue}
@@ -155,7 +155,7 @@ export default function Budget() {
                 onClick={handleSaveLimit}
                 disabled={!editCategory || !editValue || saving}
               >
-                <Save size={14} /> Commit Sequence
+                <Save size={14} /> Save
               </button>
             </div>
           </motion.div>
@@ -182,7 +182,7 @@ export default function Budget() {
                     <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: 8 }}>
                       <span style={{ fontWeight: 600 }}>{cat}</span>
                       <span style={{ fontSize: '0.85rem', color: 'var(--text-muted)' }}>
-                        ${b.spent.toFixed(0)} / ${b.limit.toFixed(0)}
+                        ₹{b.spent.toFixed(0)} / ₹{b.limit.toFixed(0)}
                       </span>
                     </div>
                     <div className="progress-bar-container">

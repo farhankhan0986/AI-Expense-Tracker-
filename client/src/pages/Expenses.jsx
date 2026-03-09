@@ -129,7 +129,7 @@ export default function Expenses() {
           {loading ? (
             <div className="loading-container"><div className="loading-spinner" /></div>
           ) : filtered.length === 0 ? (
-            <div className="empty-state">
+            <div className="flex flex-col items-center justify-center mt-20 mb-20">
               <Receipt size={48} className="empty-state-icon" />
               <p>No transaction records found in database.</p>
             </div>

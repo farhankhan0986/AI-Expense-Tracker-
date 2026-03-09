@@ -19,7 +19,7 @@ const GlassTooltip = ({ active, payload, label }) => {
       {payload.map((p, i) => (
         <div key={i} style={{ color: p.color || 'var(--text-primary)', fontWeight: 600, display: 'flex', justifyContent: 'space-between', gap: '16px' }}>
           <span>{p.dataKey === 'actual' ? 'Actual Data' : 'AI Prediction'}</span>
-          <span>${p.value.toLocaleString()}</span>
+          <span>₹{p.value.toLocaleString()}</span>
         </div>
       ))}
     </div>
@@ -44,7 +44,7 @@ export default function FinancialHorizon() {
         </div>
         <div style={{ textAlign: 'right' }}>
           <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Predicted Shortfall (Apr)</div>
-          <div style={{ color: 'var(--warning)', fontWeight: 600, fontFamily: 'var(--font-display)' }}>-$200.00</div>
+          <div style={{ color: 'var(--warning)', fontWeight: 600, fontFamily: 'var(--font-display)' }}>-₹200.00</div>
         </div>
       </div>
 

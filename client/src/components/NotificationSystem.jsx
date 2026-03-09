@@ -20,7 +20,7 @@ export default function NotificationSystem() {
         style={{ 
           width: '48px', height: '48px', borderRadius: '50%', 
           display: 'flex', alignItems: 'center', justifyContent: 'center',
-          cursor: 'pointer', border: '1px solid var(--accent-blue)',
+          cursor: 'pointer', border: '1px solid var(--accent-white-dim)', zIndex: 1,
           position: 'relative'
         }}
       >

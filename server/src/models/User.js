@@ -23,6 +23,11 @@ const userSchema = new mongoose.Schema({
     type: Number,
     default: 0,
   },
+  categoryBudgets: {
+    type: Map,
+    of: Number,
+    default: {},
+  },
   createdAt: {
     type: Date,
     default: Date.now,

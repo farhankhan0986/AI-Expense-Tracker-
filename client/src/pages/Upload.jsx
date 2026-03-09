@@ -190,7 +190,7 @@ export default function Upload() {
                     <div className="expense-item-desc">{exp.description}</div>
                   </div>
                   <span className={`category-badge ${exp.category}`}>{exp.category}</span>
-                  <div className="expense-item-amount">${exp.amount?.toFixed(2)}</div>
+                  <div className="expense-item-amount">₹{exp.amount?.toFixed(2)}</div>
                 </motion.div>
               ))}
             </AnimatePresence>

@@ -23,7 +23,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return (
     <div className="glass-card" style={{ padding: '10px 16px', fontSize: '0.82rem' }}>
       <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>${payload[0].value.toLocaleString()}</div>
+      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₹{payload[0].value.toLocaleString()}</div>
     </div>
   );
 };
@@ -127,8 +127,8 @@ export default function Dashboard() {
         <motion.div variants={container} initial="hidden" animate="show">
           {/* Stats */}
           <motion.div className="stats-grid" variants={item} style={{ marginBottom: 32 }}>
-            <StatCard icon={DollarSign} label="Total Spent" value={`$${totalSpent.toFixed(2)}`} color="pink" trend="up" trendValue="12%" />
-            <StatCard icon={Wallet} label="Remaining Budget" value={`$${remaining.toFixed(2)}`} color="teal" trend={remaining > 0 ? 'up' : 'down'} trendValue={`${((remaining / budget) * 100).toFixed(0)}%`} />
+            <StatCard icon={DollarSign} label="Total Spent" value={`₹${totalSpent.toFixed(2)}`} color="pink" trend="up" trendValue="12%" />
+            <StatCard icon={Wallet} label="Remaining Budget" value={`₹${remaining.toFixed(2)}`} color="teal" trend={remaining > 0 ? 'up' : 'down'} trendValue={`${((remaining / budget) * 100).toFixed(0)}%`} />
             <StatCard icon={Tag} label="Top Category" value={topCategory.charAt(0).toUpperCase() + topCategory.slice(1)} color="purple" />
             <StatCard icon={Hash} label="Transactions" value={expenses.length} color="blue" />
           </motion.div>
@@ -178,7 +178,7 @@ export default function Dashboard() {
                         <span style={{ fontWeight: 500 }}>{cat.name}</span>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontWeight: 600 }}>${cat.amount.toFixed(2)}</div>
+                        <div style={{ fontWeight: 600 }}>₹{cat.amount.toFixed(2)}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{Math.round(cat.percent * 100)}%</div>
                       </div>
                     </div>

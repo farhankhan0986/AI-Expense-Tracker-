@@ -70,7 +70,7 @@ export default function ExpenseOrbit({ totalSpent, categories }) {
         >
           <span style={{ fontSize: '0.75rem', color: 'var(--text-secondary)', textTransform: 'uppercase', letterSpacing: '1px' }}>Orbit</span>
           <h2 style={{ fontSize: '1.5rem', color: 'var(--text-primary)', margin: 0, fontFamily: 'var(--font-display)' }}>
-            ${totalSpent.toFixed(0)}
+            ₹{totalSpent.toFixed(0)}
           </h2>
         </motion.div>
       </div>

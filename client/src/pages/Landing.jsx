@@ -1,7 +1,8 @@
 import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
-import { Sparkles, Brain, Bell, BarChart3, PiggyBank, ArrowRight } from 'lucide-react';
+import { Sparkles, Brain, Bell, BarChart3, PiggyBank, ArrowRight, Bot } from 'lucide-react';
 import AnimatedBackground from '../components/AnimatedBackground';
+import logo from '../assests/logo.svg';
 
 const FEATURES = [
   {
@@ -58,11 +59,13 @@ export default function Landing() {
 
       {/* Navbar */}
       <header className="landing-nav">
-        <div className="landing-nav-brand">
-          <Sparkles size={20} />
-          <span className="gradient-text" style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }}>
+        <div className="flex gap-2 items-center w-full ">
+          <div style={{ textAlign: 'center', marginBottom: '' }}>
+            <img src={logo} alt="Logo" width="40" height="40" />
+          </div>
+          <div className="gradient-text" style={{ fontFamily: 'var(--font-display)', fontWeight: 700 }}>
             SpendLens
-          </span>
+          </div>
         </div>
         <div className="landing-nav-actions">
           <Link to="/login" className="btn btn-ghost">Log in</Link>
@@ -71,15 +74,15 @@ export default function Landing() {
       </header>
 
       {/* Hero */}
-      <section className="landing-hero">
+      <section className="flex justify-center items-center mt-20 mb-20 gap-20">
         <motion.div
           className="landing-hero-content"
           initial={{ opacity: 0, y: 40 }}
           animate={{ opacity: 1, y: 0 }}
           transition={{ duration: 0.7, ease: [0.34, 1.56, 0.64, 1] }}
         >
-          <span className="landing-eyebrow">
-            <Sparkles size={14} /> AI-Powered Finance
+          <span className="flex justify-start w-fit  items-center gap-2 mb-2 text-xs text-gray-400 px-2 py-1 border border-gray-700 rounded-full  ">
+            <Bot size={16} className='text-blue-400  animate-pulse delay-200' /> AI-Powered Finance
           </span>
           <h1 className="landing-title">
             Track Spending.
@@ -103,26 +106,69 @@ export default function Landing() {
 
         <motion.div
           className="landing-hero-visual"
-          initial={{ opacity: 0, scale: 0.9 }}
-          animate={{ opacity: 1, scale: 1 }}
-          transition={{ duration: 0.8, delay: 0.2 }}
+          initial={{ opacity: 0, y: 40 }}
+          animate={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
         >
-          <div className="hero-mockup glass-card">
-            <div className="hero-mockup-row">
-              <div className="hero-dot" style={{ background: 'var(--accent-purple)' }} />
-              <div className="hero-bar" style={{ width: '70%', background: 'var(--gradient-primary)' }} />
+          <div className="hero-mockup glass-card p-6 rounded-2xl w-[700px]">
+
+            {/* Total Spending */}
+            <div className="mb-5">
+              <p className="text-sm text-gray-400">Monthly Spending</p>
+              <h2 className="text-2xl font-semibold text-white">₹18,420</h2>
             </div>
-            <div className="hero-mockup-row">
-              <div className="hero-dot" style={{ background: 'var(--accent-teal)' }} />
-              <div className="hero-bar" style={{ width: '55%', background: 'var(--gradient-secondary)' }} />
-            </div>
-            <div className="hero-mockup-row">
-              <div className="hero-dot" style={{ background: 'var(--accent-pink)' }} />
-              <div className="hero-bar" style={{ width: '85%', background: 'var(--gradient-warm)' }} />
-            </div>
-            <div className="hero-mockup-row">
-              <div className="hero-dot" style={{ background: 'var(--accent-orange)' }} />
-              <div className="hero-bar" style={{ width: '40%', background: 'var(--gradient-cool)' }} />
+
+            {/* Categories */}
+            <div className="space-y-4">
+
+              {/* Food */}
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-purple-500"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-300">Food</p>
+                  <div className="w-full h-2 bg-gray-700 rounded-full mt-1">
+                    <div className="h-2 rounded-full bg-purple-500 w-[70%]"></div>
+                  </div>
+                </div>
+                <span className="text-sm text-gray-400">₹6,200</span>
+              </div>
+
+              {/* Transport */}
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-teal-400"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-300">Transport</p>
+                  <div className="w-full h-2 bg-gray-700 rounded-full mt-1">
+                    <div className="h-2 rounded-full bg-teal-400 w-[40%]"></div>
+                  </div>
+                </div>
+                <span className="text-sm text-gray-400">₹3,100</span>
+              </div>
+
+              {/* Shopping */}
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-pink-500"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-300">Shopping</p>
+                  <div className="w-full h-2 bg-gray-700 rounded-full mt-1">
+                    <div className="h-2 rounded-full bg-pink-500 w-[55%]"></div>
+                  </div>
+                </div>
+                <span className="text-sm text-gray-400">₹4,800</span>
+              </div>
+
+              {/* Bills */}
+              <div className="flex items-center gap-3">
+                <div className="w-3 h-3 rounded-full bg-orange-400"></div>
+                <div className="flex-1">
+                  <p className="text-sm text-gray-300">Bills</p>
+                  <div className="w-full h-2 bg-gray-700 rounded-full mt-1">
+                    <div className="h-2 rounded-full bg-orange-400 w-[35%]"></div>
+                  </div>
+                </div>
+                <span className="text-sm text-gray-400">₹2,900</span>
+              </div>
+
             </div>
           </div>
         </motion.div>

@@ -32,8 +32,8 @@ export default function BudgetBuilder({ budgets, totalIncome = 3000 }) {
     <div className="glass-card" style={{ padding: '24px' }}>
       <h3 style={{ fontFamily: 'var(--font-display)', marginBottom: '16px', letterSpacing: '1px' }}>Resource Allocation Nexus</h3>
       <div style={{ display: 'flex', justifyContent: 'space-between', marginBottom: '8px', fontSize: '0.85rem' }}>
-        <span style={{ color: 'var(--text-muted)' }}>Total Income Stream: <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>${totalIncome}</span></span>
-        <span style={{ color: 'var(--accent-teal)' }}>Unallocated: ${remaining}</span>
+        <span style={{ color: 'var(--text-muted)' }}>Total Income Stream: <span style={{ color: 'var(--text-primary)', fontWeight: 600 }}>₹{totalIncome}</span></span>
+        <span style={{ color: 'var(--accent-teal)' }}>Unallocated: ₹{remaining}</span>
       </div>
 
       {/* Segmented Bar (Puzzle Pieces) */}
@@ -92,7 +92,7 @@ export default function BudgetBuilder({ budgets, totalIncome = 3000 }) {
             </div>
             <div style={{ textAlign: 'right' }}>
               <div style={{ fontSize: '1.25rem', fontFamily: 'var(--font-display)', fontWeight: 600 }}>
-                ${entries.find(e => e.name === hoveredNode)?.limit}
+                ₹{entries.find(e => e.name === hoveredNode)?.limit}
               </div>
               <div style={{ fontSize: '0.8rem', color: 'var(--accent-teal)' }}>
                 {entries.find(e => e.name === hoveredNode)?.spent} utilized

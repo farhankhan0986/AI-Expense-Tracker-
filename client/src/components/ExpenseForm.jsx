@@ -63,7 +63,7 @@ export default function ExpenseForm({ onSubmit, loading }) {
       <h4 style={{ marginBottom: '20px' }}>Add Expense</h4>
       <div className="expense-form-grid">
         <div className="form-group">
-          <label className="form-label" htmlFor="exp-amount">Amount ($)</label>
+          <label className="form-label" htmlFor="exp-amount">Amount (₹)</label>
           <input
             id="exp-amount"
             className="form-input"

@@ -4,6 +4,7 @@ import { motion } from 'framer-motion';
 import { Mail, Lock, Sparkles } from 'lucide-react';
 import { useAuth } from '../hooks/useAuth';
 import AnimatedBackground from '../components/AnimatedBackground';
+import logo from '../assests/logo.svg';
 
 export default function Login() {
   const { login } = useAuth();
@@ -36,8 +37,10 @@ export default function Login() {
         animate={{ opacity: 1, y: 0, scale: 1 }}
         transition={{ duration: 0.5, ease: [0.34, 1.56, 0.64, 1] }}
       >
-        <div style={{ textAlign: 'center', marginBottom: '8px' }}>
-          <Sparkles size={28} style={{ color: 'var(--accent-purple)' }} />
+        <div   className='flex justify-center items-center'>
+        <div style={{ textAlign: 'center', marginBottom: '8px' }}>  
+          <img src={logo} alt="Logo" width="60" height="60" />
+        </div>
         </div>
         <h1 className="auth-title" style={{ textAlign: 'center' }}>
           Welcome back

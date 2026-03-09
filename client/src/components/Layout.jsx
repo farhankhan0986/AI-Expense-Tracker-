@@ -16,13 +16,14 @@ import { useAuth } from '../hooks/useAuth';
 import AnimatedBackground from './AnimatedBackground';
 import SecurityShield from './SecurityShield';
 import NotificationSystem from './NotificationSystem';
+import logo from '../assests/logo.svg';
 
 const NAV_LINKS = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/expenses', label: 'Expenses', icon: Receipt },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
-  { to: '/upload', label: 'Upload', icon: Upload },
   { to: '/budget', label: 'Budget', icon: Wallet },
+  { to: '/upload', label: 'Upload', icon: Upload },
   { to: '/suggestions', label: 'Suggestions', icon: Lightbulb },
 ];
 
@@ -33,7 +34,7 @@ export default function Layout() {
 
   const handleLogout = () => {
     logout();
-    navigate('/');
+    navigate('/landing');
   };
 
   const closeSidebar = () => setSidebarOpen(false);
@@ -69,8 +70,8 @@ export default function Layout() {
       {/* Sidebar */}
       <aside className={`sidebar ${sidebarOpen ? 'open' : ''}`}>
         <div className="sidebar-brand">
-          <div className="sidebar-brand-icon">
-            <Sparkles size={18} />
+          <div style={{ textAlign: 'center', marginBottom: '' }}>
+            <img src={logo} alt="Logo" width="40" height="40" />
           </div>
           <span className="sidebar-brand-text">SpendLens</span>
         </div>
@@ -104,8 +105,8 @@ export default function Layout() {
             <LogOut size={18} />
           </button>
         </div>
-        
-        <SecurityShield status="secure" />
+
+        {/* <SecurityShield status="secure" /> */}
       </aside>
 
       {/* Main content */}

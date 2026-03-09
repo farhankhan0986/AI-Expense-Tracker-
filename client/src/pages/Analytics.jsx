@@ -20,7 +20,7 @@ const GlassTooltip = ({ active, payload, label }) => {
       {label && <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>{label}</div>}
       {payload.map((p, i) => (
         <div key={i} style={{ color: p.color || 'var(--text-primary)', fontWeight: 600 }}>
-          {p.name}: ${p.value.toLocaleString()}
+          {p.name}: ₹{p.value.toLocaleString()}
         </div>
       ))}
     </div>
@@ -93,7 +93,7 @@ export default function Analytics() {
           <motion.div variants={item} className="stats-grid" style={{ marginBottom: 32 }}>
             <div className="glass-card stat-card">
               <div className="stat-card-label">Total This Month</div>
-              <div className="stat-card-value">${totalSpent.toLocaleString()}</div>
+              <div className="stat-card-value">₹{totalSpent.toLocaleString()}</div>
             </div>
             <div className="glass-card stat-card">
               <div className="stat-card-label">Categories</div>
@@ -101,7 +101,7 @@ export default function Analytics() {
             </div>
             <div className="glass-card stat-card">
               <div className="stat-card-label">Avg / Category</div>
-              <div className="stat-card-value">${(totalSpent / (categories.length || 1)).toFixed(0)}</div>
+              <div className="stat-card-value">₹{(totalSpent / (categories.length || 1)).toFixed(0)}</div>
             </div>
             <div className="glass-card stat-card">
               <div className="stat-card-label">Highest</div>
