@@ -60,7 +60,7 @@ export default function DataPod({ expense, onDelete }) {
       {/* Amount and Delete */}
       <div style={{ display: 'flex', alignItems: 'center', gap: '24px' }}>
         <span style={{ fontSize: '1.25rem', fontWeight: 600, color: 'var(--text-primary)', textShadow: `0 0 10px ${color}80` }}>
-          -${expense.amount.toFixed(2)}
+          ₹{expense.amount.toFixed(2)}
         </span>
         
         <button

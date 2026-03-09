@@ -21,7 +21,7 @@ export default function BudgetAlert({ category, spent, limit, percentage }) {
             : `${category} budget at ${Math.round(percentage)}%`}
         </div>
         <div className="budget-alert-text">
-          ${spent.toFixed(2)} spent of ${limit.toFixed(2)} limit
+          ₹{spent.toFixed(2)} spent of ₹{limit.toFixed(2)} limit
         </div>
       </div>
     </motion.div>

@@ -11,7 +11,16 @@ const budgetRoutes = require('./routes/budget');
 
 const app = express();
 
-app.use(cors());
+app.use(
+  cors({
+    origin: [
+      "http://localhost:5173",
+      "https://ai-expense-tracker-kappa-sooty.vercel.app"
+    ],
+    methods: ["GET", "POST", "PUT", "DELETE"],
+    allowedHeaders: ["Content-Type", "Authorization"],
+  })
+);
 app.use(express.json());
 // app.use(rateLimit({ windowMs: 15 * 60 * 1000, max: 100 }));
 

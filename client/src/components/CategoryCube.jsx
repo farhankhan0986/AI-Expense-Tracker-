@@ -89,7 +89,7 @@ export default function CategoryCube() {
             <div style={{ marginTop: '16px', background: 'rgba(168,85,247,0.1)', border: '1px solid var(--accent-purple)', padding: '12px', borderRadius: '4px' }}>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '8px' }}>Unassigned Transaction</div>
               <div style={{ fontWeight: 600, fontSize: '1rem', display: 'flex', justifyContent: 'space-between' }}>
-                Uber Trip <span style={{ color: 'var(--text-primary)' }}>$24.50</span>
+                Uber Trip <span style={{ color: 'var(--text-primary)' }}>₹24.50</span>
               </div>
               <div style={{ display: 'flex', alignItems: 'center', gap: '8px', marginTop: '12px' }}>
                 <span style={{ fontSize: '0.75rem' }}>AI Suggests:</span>
