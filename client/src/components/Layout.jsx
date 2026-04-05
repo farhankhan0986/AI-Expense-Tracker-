@@ -77,7 +77,7 @@ export default function Layout() {
           <div style={{ textAlign: 'center', marginBottom: '' }} >
             <img src={logo} alt="Logo" width="40" height="40" />
           </div>
-          <span className="sidebar-brand-text">SpendLens</span>
+          <span className="sidebar-brand-text" style={{ color: '#ef4444' }}>SpendLens</span>
         </div>
 
         <nav className="sidebar-nav" role="navigation" aria-label="Main navigation">

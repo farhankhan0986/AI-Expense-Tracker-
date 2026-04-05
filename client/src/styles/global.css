@@ -1,6 +1,5 @@
 /* =============================================
-   SpendLens — Premium Minimalist Styles
-   Clean, flat, high-contrast aesthetics
+   SpendLens — Dark Slate + Red UI
    ============================================= */
 
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
@@ -10,46 +9,51 @@
 
 
 :root {
-  /* Background & surfaces (Light / Default) */
-  --bg-primary: #fafafa;
-  --bg-secondary: #ffffff;
-  --bg-surface: #ffffff;
-  --bg-glass: #ffffff;
-  --bg-glass-hover: #f5f5f5;
-  --bg-glass-border: #eaeaea;
+  /* Background & surfaces — slate 800/900 */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-surface: #1e293b;
+  --bg-glass: #1e293b;
+  --bg-glass-hover: #334155;
+  --bg-glass-border: #334155;
 
-  /* Accent colors (Clean & Flat) */
-  --accent-purple: #7c3aed;
-  --accent-purple-dim: rgba(124, 58, 237, 0.1);
-  --accent-white: #ffffff;  
-  --accent-white-dim: rgba(255, 255, 255, 0.1); 
-  --accent-teal: #0d9488;
-  --accent-teal-dim: rgba(13, 148, 136, 0.1);
-  --accent-pink: #e11d48;
-  --accent-pink-dim: rgba(225, 29, 72, 0.1);
-  --accent-blue: #0070f3;
-  --accent-blue-dim: rgba(0, 112, 243, 0.1);
-  --accent-orange: #ea580c;
-  --accent-orange-dim: rgba(234, 88, 12, 0.1);
+  /* Accent colors — red 500/600 */
+  --accent-red: #ef4444;
+  --accent-red-dim: rgba(239, 68, 68, 0.15);
+  --accent-red-dark: #dc2626;
 
-  /* Gradients (Elegant, subtle depth for primary actions) */
-  --gradient-primary: linear-gradient(180deg, #111111, #000000);
-  --gradient-secondary: linear-gradient(180deg, #ffffff, #fafafa);
-  --gradient-warm: linear-gradient(135deg, #ea580c, #e11d48);
-  --gradient-cool: linear-gradient(135deg, #0d9488, #0070f3);
-  --gradient-hero: #000000;
+  /* Legacy aliases → all map to red now */
+  --accent-purple: #ef4444;
+  --accent-purple-dim: rgba(239, 68, 68, 0.15);
+  --accent-teal: #ef4444;
+  --accent-teal-dim: rgba(239, 68, 68, 0.1);
+  --accent-pink: #ef4444;
+  --accent-pink-dim: rgba(239, 68, 68, 0.1);
+  --accent-blue: #ef4444;
+  --accent-blue-dim: rgba(239, 68, 68, 0.1);
+  --accent-orange: #ef4444;
+  --accent-orange-dim: rgba(239, 68, 68, 0.1);
+  --accent-white: #ffffff;
+  --accent-white-dim: rgba(255, 255, 255, 0.1);
 
-  /* Text — Stark contrast */
-  --text-primary: #111827;
-  --text-secondary: #4b5563;
-  --text-muted: #888888;
-  --text-inverse: #ffffff;
+  /* Flat replacements for gradients */
+  --gradient-primary: #ef4444;
+  --gradient-secondary: #1e293b;
+  --gradient-warm: #ef4444;
+  --gradient-cool: #ef4444;
+  --gradient-hero: #0f172a;
+
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
 
   /* Semantic */
   --success: #10b981;
   --warning: #f59e0b;
   --danger: #ef4444;
-  --info: #3b82f6;
+  --info: #ef4444;
 
   /* Typography */
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -59,18 +63,18 @@
   --sidebar-width: 260px;
   --sidebar-collapsed: 72px;
 
-  /* Radii */
-  --radius-sm: 6px;
-  --radius-md: 8px;
-  --radius-lg: 12px;
-  --radius-xl: 16px;
-  --radius-full: 9999px;
+  /* Radii — all 0 (edgy) */
+  --radius-sm: 0px;
+  --radius-md: 0px;
+  --radius-lg: 0px;
+  --radius-xl: 0px;
+  --radius-full: 0px;
 
-  /* Shadows (Soft, minimalist elevation) */
+  /* Shadows */
   --shadow-glow-purple: none;
   --shadow-glow-teal: none;
   --shadow-glow-pink: none;
-  --shadow-elevated: 0 4px 14px 0 rgba(0, 0, 0, 0.08);
+  --shadow-elevated: 0 4px 14px 0 rgba(0, 0, 0, 0.4);
 
   /* Transitions */
   --ease-spring: cubic-bezier(0.25, 1, 0.5, 1);
@@ -78,28 +82,6 @@
   --duration-fast: 150ms;
   --duration-normal: 250ms;
   --duration-slow: 400ms;
-}
-
-/* Base Dark Mode */
-@media (prefers-color-scheme: dark) {
-  :root {
-    --bg-primary: #000000;
-    --bg-secondary: #0a0a0a;
-    --bg-surface: #111111;
-    --bg-glass: #111111;
-    --bg-glass-hover: #1a1a1a;
-    --bg-glass-border: #333333;
-    
-    --text-primary: #ffffff;
-    --text-secondary: #a0a0a0;
-    --text-muted: #666666;
-    --text-inverse: #000000;
-
-    --gradient-primary: linear-gradient(180deg, #ffffff, #e6e6e6);
-    --gradient-secondary: linear-gradient(180deg, #111, #000);
-    
-    --shadow-elevated: 0 4px 14px 0 rgba(0, 0, 0, 0.5);
-  }
 }
 
 /* ---- Reset & Base ---- */
@@ -180,27 +162,27 @@ a:hover {
   color: var(--accent-blue);
 }
 
-/* ---- Minimalist Card ---- */
+/* ---- Card ---- */
 .glass-card {
   background: var(--bg-glass);
   border: 1px solid var(--bg-glass-border);
-  border-radius: var(--radius-md);
-  box-shadow: 0 1px 3px 0 rgba(0, 0, 0, 0.02);
-  transition: border-color var(--duration-fast), box-shadow var(--duration-fast);
+  border-radius: 0;
+  box-shadow: none;
+  transition: border-color var(--duration-fast);
 }
 
 .glass-card:hover {
-  border-color: var(--text-muted);
+  border-color: var(--accent-red);
 }
 
 .glass-card-interactive:hover {
   transform: none;
-  box-shadow: var(--shadow-elevated);
+  box-shadow: none;
 }
 
-/* ---- Gradient text utility (overwritten for solid minimalist) ---- */
+/* ---- Gradient text utility (overwritten for red) ---- */
 .gradient-text {
-  color: var(--text-primary);
+  color: var(--accent-red);
 }
 .gradient-text-secondary {
   color: var(--text-secondary);
@@ -222,7 +204,7 @@ a:hover {
   width: 24px;
   height: 24px;
   border: 2px solid var(--bg-glass-border);
-  border-top-color: var(--text-primary);
+  border-top-color: var(--accent-red);
   border-radius: 50%;
   animation: spin-slow 0.6s linear infinite;
 }
@@ -234,13 +216,13 @@ a:hover {
   min-height: 200px;
 }
 
-/* ---- Toast / feedback (Minimal) ---- */
+/* ---- Toast / feedback ---- */
 .toast {
   position: fixed;
   bottom: 24px;
   right: 24px;
   padding: 12px 20px;
-  border-radius: var(--radius-md);
+  border-radius: 0;
   font-size: 0.9rem;
   font-weight: 500;
   z-index: 9999;
@@ -252,7 +234,7 @@ a:hover {
 }
 
 .toast-success { border-left: 3px solid var(--success); }
-.toast-error { border-left: 3px solid var(--danger); }
+.toast-error { border-left: 3px solid var(--accent-red); }
 
 /* ---- Utilities ---- */
 .sr-only {

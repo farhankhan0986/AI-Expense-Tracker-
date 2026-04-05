@@ -63,7 +63,7 @@ export default function InsightsSidebar() {
   style={{
     padding: '16px',
     marginTop: '16px',
-    background: 'radial-gradient(circle at center, rgba(168, 85, 247, 0.15) 0%, transparent 70%)'
+    background: 'rgba(239, 68, 68, 0.05)'
   }}
 >
   <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', textAlign: 'center', fontStyle: 'italic' }}>
