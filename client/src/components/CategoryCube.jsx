@@ -26,14 +26,14 @@ export default function CategoryCube() {
           style={{ transform: `translateZ(-150px) rotateX(${rotation.x}deg) rotateY(${rotation.y}deg)` }}
         >
           {/* FRONT: Core Categories */}
-          <div className="cube-face cube-face-front" style={{ borderColor: 'var(--accent-teal)' }}>
-            <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-teal)' }}><Database size={18} /> Active Nodes</h3>
+          <div className="cube-face cube-face-front" style={{ borderColor: 'var(--accent-red)' }}>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-red)' }}><Database size={18} /> Active Nodes</h3>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '16px' }}>Manage primary databanks</p>
             <div style={{ display: 'flex', flexDirection: 'column', gap: '8px', overflowY: 'auto' }}>
               {['Food', 'Transport', 'Entertainment', 'Bills'].map(c => (
                 <div key={c} style={{ background: 'rgba(255,255,255,0.05)', padding: '8px 12px', borderRadius: '0', fontSize: '0.9rem', display: 'flex', justifyContent: 'space-between' }}>
                   <span>{c}</span>
-                  <span style={{ color: 'var(--accent-teal)' }}>Active</span>
+                  <span style={{ color: 'var(--accent-red)' }}>Active</span>
                 </div>
               ))}
             </div>
@@ -82,11 +82,11 @@ export default function CategoryCube() {
           </div>
 
           {/* TOP: Smart Categorization */}
-          <div className="cube-face cube-face-top" style={{ borderColor: 'var(--accent-purple)' }}>
-            <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-purple)' }}><Sparkles size={18} /> Smart AI</h3>
+          <div className="cube-face cube-face-top" style={{ borderColor: 'var(--accent-red)' }}>
+            <h3 style={{ display: 'flex', alignItems: 'center', gap: '8px', color: 'var(--accent-red)' }}><Sparkles size={18} /> Smart AI</h3>
             <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>Machine learning suggestions</p>
             
-            <div style={{ marginTop: '16px', background: 'rgba(168,85,247,0.1)', border: '1px solid var(--accent-purple)', padding: '12px', borderRadius: '0' }}>
+            <div style={{ marginTop: '16px', background: 'var(--accent-red-dim)', border: '1px solid var(--accent-red)', padding: '12px', borderRadius: '0' }}>
               <div style={{ fontSize: '0.8rem', color: 'var(--text-muted)', marginBottom: '8px' }}>Unassigned Transaction</div>
               <div style={{ fontWeight: 600, fontSize: '1rem', display: 'flex', justifyContent: 'space-between' }}>
                 Uber Trip <span style={{ color: 'var(--text-primary)' }}>₹24.50</span>
