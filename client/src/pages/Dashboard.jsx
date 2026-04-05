@@ -95,17 +95,17 @@ export default function Dashboard() {
         }, {})
       ).map(([name, amount]) => {
         const colors = {
-          Food: 'var(--accent-pink)',
-          Transport: 'var(--accent-blue)',
-          Entertainment: 'var(--accent-purple)',
-          Bills: 'var(--accent-teal)',
-          Shopping: 'var(--accent-orange)'
+          Food: '#ef4444',
+          Transport: '#dc2626',
+          Entertainment: '#ef4444',
+          Bills: '#dc2626',
+          Shopping: '#ef4444'
         };
         return { 
           name, 
           amount, 
           percent: totalSpent ? (amount / totalSpent) : 0, 
-          color: colors[name] || 'var(--accent-purple)' 
+          color: colors[name] || '#ef4444' 
         };
       })
     : [];
@@ -222,14 +222,14 @@ export default function Dashboard() {
                       <Tooltip content={<CustomTooltip />} />
                       <defs>
                         <linearGradient id="colorDailyDash" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="var(--accent-teal)" stopOpacity={0.15}/>
-                          <stop offset="95%" stopColor="var(--accent-teal)" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#ef4444" stopOpacity={0.15}/>
+                          <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
                       <Area 
                         type="monotone" 
                         dataKey="total" 
-                        stroke="var(--accent-teal)" 
+                        stroke="#ef4444" 
                         strokeWidth={2}
                         fillOpacity={1} 
                         fill="url(#colorDailyDash)" 

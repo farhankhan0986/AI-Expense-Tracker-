@@ -34,12 +34,12 @@ export default function FinancialHorizon() {
       whileHover={{ boxShadow: '0 0 20px rgba(45, 212, 191, 0.2)' }}
     >
       {/* 3D styling decorative elements */}
-      <div style={{ position: 'absolute', top: 0, left: '20%', width: '150px', height: '2px', background: 'var(--accent-teal)', filter: 'blur(2px)' }} />
-      <div style={{ position: 'absolute', bottom: 0, right: '20%', width: '150px', height: '2px', background: 'var(--accent-purple)', filter: 'blur(2px)' }} />
+      <div style={{ position: 'absolute', top: 0, left: '20%', width: '150px', height: '2px', background: '#ef4444', filter: 'blur(2px)' }} />
+      <div style={{ position: 'absolute', bottom: 0, right: '20%', width: '150px', height: '2px', background: '#ef4444', filter: 'blur(2px)' }} />
       
       <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '24px' }}>
         <div>
-          <h3 style={{ fontFamily: 'var(--font-display)', color: 'var(--accent-teal)', letterSpacing: '1px' }}>Financial Horizon</h3>
+          <h3 style={{ fontFamily: 'var(--font-display)', color: '#ef4444', letterSpacing: '1px' }}>Financial Horizon</h3>
           <p style={{ fontSize: '0.8rem', color: 'var(--text-muted)' }}>6-Month AI Expense Projection</p>
         </div>
         <div style={{ textAlign: 'right' }}>
@@ -53,12 +53,12 @@ export default function FinancialHorizon() {
           <AreaChart data={data} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
             <defs>
               <linearGradient id="colorActual" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--accent-purple)" stopOpacity={0.6}/>
-                <stop offset="95%" stopColor="var(--accent-purple)" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#ef4444" stopOpacity={0.6}/>
+                <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
               </linearGradient>
               <linearGradient id="colorPredicted" x1="0" y1="0" x2="0" y2="1">
-                <stop offset="5%" stopColor="var(--accent-teal)" stopOpacity={0.6}/>
-                <stop offset="95%" stopColor="var(--accent-teal)" stopOpacity={0}/>
+                <stop offset="5%" stopColor="#ef4444" stopOpacity={0.6}/>
+                <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
               </linearGradient>
             </defs>
             <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" vertical={false} />
@@ -70,7 +70,7 @@ export default function FinancialHorizon() {
             <Area 
               type="monotone" 
               dataKey="actual" 
-              stroke="var(--accent-purple)" 
+              stroke="#ef4444" 
               strokeWidth={3}
               fillOpacity={1} 
               fill="url(#colorActual)" 
@@ -79,7 +79,7 @@ export default function FinancialHorizon() {
             <Area 
               type="monotone" 
               dataKey="predicted" 
-              stroke="var(--accent-teal)" 
+              stroke="#ef4444" 
               strokeWidth={3}
               strokeDasharray="5 5"
               fillOpacity={1} 

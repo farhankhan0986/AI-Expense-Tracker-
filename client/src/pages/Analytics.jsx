@@ -8,7 +8,7 @@ import {
 } from 'recharts';
 import * as api from '../utils/api';
 
-const COLORS = ['#2563eb', '#10b981', '#f59e0b', '#ef4444', '#6b7280', '#000000'];
+const COLORS = ['#ef4444', '#dc2626', '#b91c1c', '#991b1b', '#7f1d1d', '#fca5a5'];
 
 const DEMO_CATEGORIES = [];
 const DEMO_TREND = [];
@@ -147,7 +147,7 @@ export default function Analytics() {
                   <CartesianGrid strokeDasharray="3 3" stroke="rgba(255,255,255,0.05)" horizontal={false} />
                   <XAxis type="number" tick={{ fill: '#6b6a7d', fontSize: 12 }} axisLine={false} tickLine={false} />
                   <YAxis type="category" dataKey="name" tick={{ fill: '#a1a0b3', fontSize: 12 }} axisLine={false} tickLine={false} width={90} />
-                  <ReTooltip content={<GlassTooltip />} cursor={{ fill: 'rgba(168, 85, 247, 0.06)' }} />
+                  <ReTooltip content={<GlassTooltip />} cursor={{ fill: 'rgba(239, 68, 68, 0.08)' }} />
                   <Bar dataKey="value" radius={[0, 6, 6, 0]}>
                     {categories.map((_, idx) => (
                       <Cell key={idx} fill={COLORS[idx % COLORS.length]} />
@@ -171,10 +171,10 @@ export default function Analytics() {
                   <Line
                     type="monotone"
                     dataKey="total"
-                    stroke="#2563eb"
+                    stroke="#ef4444"
                     strokeWidth={3}
-                    dot={{ r: 4, fill: '#2563eb', stroke: 'none' }}
-                    activeDot={{ r: 6, fill: '#1d4ed8' }}
+                    dot={{ r: 4, fill: '#ef4444', stroke: 'none' }}
+                    activeDot={{ r: 6, fill: '#dc2626' }}
                   />
                 </LineChart>
               </ResponsiveContainer>
@@ -205,14 +205,14 @@ export default function Analytics() {
                     <LineTooltip content={<GlassTooltip />} />
                     <defs>
                       <linearGradient id="colorDaily" x1="0" y1="0" x2="0" y2="1">
-                        <stop offset="5%" stopColor="var(--accent-teal)" stopOpacity={0.4}/>
-                        <stop offset="95%" stopColor="var(--accent-teal)" stopOpacity={0}/>
+                        <stop offset="5%" stopColor="#ef4444" stopOpacity={0.4}/>
+                        <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
                       </linearGradient>
                     </defs>
                     <Area 
                       type="monotone" 
                       dataKey="total" 
-                      stroke="var(--accent-teal)" 
+                      stroke="#ef4444" 
                       strokeWidth={2}
                       fillOpacity={1} 
                       fill="url(#colorDaily)" 
