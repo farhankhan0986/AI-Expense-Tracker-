@@ -9,51 +9,51 @@
 
 
 :root {
-  /* Background & surfaces — slate 800/900 */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-surface: #1e293b;
-  --bg-glass: #1e293b;
-  --bg-glass-hover: #334155;
-  --bg-glass-border: #334155;
+  /* Background & surfaces — pure black */
+  --bg-primary: #000000;
+  --bg-secondary: #000000;
+  --bg-surface: #000000;
+  --bg-glass: #000000;
+  --bg-glass-hover: #111111;
+  --bg-glass-border: #222222;
 
-  /* Accent colors — red 500/600 */
-  --accent-red: #ef4444;
-  --accent-red-dim: rgba(239, 68, 68, 0.15);
-  --accent-red-dark: #dc2626;
+  /* Accent colors — custom vibrant red (220, 38, 38) */
+  --accent-red: #dc2626;
+  --accent-red-dim: rgba(220, 38, 38, 0.15);
+  --accent-red-dark: #b91c1c;
 
   /* Legacy aliases → all map to red now */
-  --accent-purple: #ef4444;
-  --accent-purple-dim: rgba(239, 68, 68, 0.15);
-  --accent-teal: #ef4444;
-  --accent-teal-dim: rgba(239, 68, 68, 0.1);
-  --accent-pink: #ef4444;
-  --accent-pink-dim: rgba(239, 68, 68, 0.1);
-  --accent-blue: #ef4444;
-  --accent-blue-dim: rgba(239, 68, 68, 0.1);
-  --accent-orange: #ef4444;
-  --accent-orange-dim: rgba(239, 68, 68, 0.1);
+  --accent-purple: #dc2626;
+  --accent-purple-dim: rgba(220, 38, 38, 0.15);
+  --accent-teal: #dc2626;
+  --accent-teal-dim: rgba(220, 38, 38, 0.1);
+  --accent-pink: #dc2626;
+  --accent-pink-dim: rgba(220, 38, 38, 0.1);
+  --accent-blue: #dc2626;
+  --accent-blue-dim: rgba(220, 38, 38, 0.1);
+  --accent-orange: #dc2626;
+  --accent-orange-dim: rgba(220, 38, 38, 0.1);
   --accent-white: #ffffff;
   --accent-white-dim: rgba(255, 255, 255, 0.1);
 
   /* Flat replacements for gradients */
-  --gradient-primary: #ef4444;
-  --gradient-secondary: #1e293b;
-  --gradient-warm: #ef4444;
-  --gradient-cool: #ef4444;
-  --gradient-hero: #0f172a;
+  --gradient-primary: #dc2626;
+  --gradient-secondary: #000000;
+  --gradient-warm: #dc2626;
+  --gradient-cool: #dc2626;
+  --gradient-hero: #000000;
 
   /* Text */
   --text-primary: #f8fafc;
   --text-secondary: #94a3b8;
   --text-muted: #64748b;
-  --text-inverse: #0f172a;
+  --text-inverse: #000000;
 
   /* Semantic */
   --success: #10b981;
   --warning: #f59e0b;
-  --danger: #ef4444;
-  --info: #ef4444;
+  --danger: #dc2626;
+  --info: #dc2626;
 
   /* Typography */
   --font-body: 'Inter', system-ui, -apple-system, sans-serif;
@@ -159,7 +159,7 @@ a {
   transition: color var(--duration-fast) var(--ease-smooth);
 }
 a:hover {
-  color: var(--accent-blue);
+  color: black;
 }
 
 /* ---- Card ---- */

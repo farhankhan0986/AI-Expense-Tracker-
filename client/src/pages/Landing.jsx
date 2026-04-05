@@ -90,7 +90,7 @@ export default function Landing() {
             <Link to="/register" className="btn btn-primary btn-lg">
               Start Free <ArrowRight size={18} />
             </Link>
-            <Link to="/login" className="btn btn-secondary btn-lg">
+            <Link to="/login" className="hover:text-red-500 btn btn-secondary btn-lg">
               Sign In
             </Link>
           </div>

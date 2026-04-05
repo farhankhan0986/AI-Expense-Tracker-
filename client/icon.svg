@@ -1,6 +1,6 @@
 <svg width="200" height="200" viewBox="0 0 200 200" xmlns="http://www.w3.org/2000/svg">
   <!-- Background -->
-  <rect x="10" y="10" width="180" height="180" rx="0" fill="#ef4444"/>
+  <rect x="10" y="10" width="180" height="180" rx="0" fill="#dc2626"/>
 
   <!-- Chart bars — sharp corners -->
   <rect x="55" y="105" width="15" height="40" rx="0" fill="white"/>
@@ -9,5 +9,5 @@
 
   <!-- Dollar square -->
   <rect x="82" y="42" width="36" height="36" rx="0" fill="white"/>
-  <text x="100" y="66" font-size="18" text-anchor="middle" fill="#ef4444" font-family="Arial" font-weight="700">$</text>
+  <text x="100" y="66" font-size="18" text-anchor="middle" fill="#dc2626" font-family="Arial" font-weight="700">$</text>
 </svg>
