@@ -1,4 +1,4 @@
-import { Link } from 'react-router-dom';
+﻿import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sparkles, Brain, Bell, BarChart3, PiggyBank, ArrowRight, Bot } from 'lucide-react';
 import AnimatedBackground from '../components/AnimatedBackground';
@@ -8,30 +8,30 @@ const FEATURES = [
   {
     icon: Brain,
     title: 'AI Classification',
-    description: 'Expenses are automatically categorised using smart pattern recognition — no manual tagging needed.',
-    color: '#ef4444',
-    bg: 'rgba(239, 68, 68, 0.12)',
+    description: 'Expenses are automatically categorised using smart pattern recognition â€” no manual tagging needed.',
+    color: '#ff0000',
+    bg: 'rgba(255, 0, 0, 0.12)',
   },
   {
     icon: Bell,
     title: 'Budget Alerts',
     description: 'Real-time notifications when your spending approaches or exceeds category budgets.',
-    color: '#ef4444',
-    bg: 'rgba(239, 68, 68, 0.12)',
+    color: '#ff0000',
+    bg: 'rgba(255, 0, 0, 0.12)',
   },
   {
     icon: BarChart3,
     title: 'Visual Analytics',
     description: 'Clear charts and trend lines that reveal exactly where your money goes each month.',
-    color: '#ef4444',
-    bg: 'rgba(239, 68, 68, 0.12)',
+    color: '#ff0000',
+    bg: 'rgba(255, 0, 0, 0.12)',
   },
   {
     icon: PiggyBank,
     title: 'Smart Savings',
     description: 'Personalised saving tips powered by spending analysis to help you keep more of what you earn.',
-    color: '#ef4444',
-    bg: 'rgba(239, 68, 68, 0.12)',
+    color: '#ff0000',
+    bg: 'rgba(255, 0, 0, 0.12)',
   },
 ];
 
@@ -83,7 +83,7 @@ export default function Landing() {
           </h1>
           <p className="landing-subtitle">
             SpendLens uses artificial intelligence to classify your expenses, alert you
-            before budgets break, and surface personalised savings — all in a beautifully
+            before budgets break, and surface personalised savings â€” all in a beautifully
             crafted dashboard.
           </p>
           <div className="landing-cta-group">
@@ -107,7 +107,7 @@ export default function Landing() {
             {/* Total Spending */}
             <div className="mb-5">
               <p className="text-sm text-gray-400">Monthly Spending</p>
-              <h2 className="text-2xl font-semibold text-white">₹18,420</h2>
+              <h2 className="text-2xl font-semibold text-white">â‚¹18,420</h2>
             </div>
 
             {/* Categories */}
@@ -122,7 +122,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-500 w-[70%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">₹6,200</span>
+                <span className="text-sm text-gray-400">â‚¹6,200</span>
               </div>
 
               {/* Transport */}
@@ -134,7 +134,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-400 w-[40%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">₹3,100</span>
+                <span className="text-sm text-gray-400">â‚¹3,100</span>
               </div>
 
               {/* Shopping */}
@@ -146,7 +146,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-600 w-[55%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">₹4,800</span>
+                <span className="text-sm text-gray-400">â‚¹4,800</span>
               </div>
 
               {/* Bills */}
@@ -158,7 +158,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-300 w-[35%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">₹2,900</span>
+                <span className="text-sm text-gray-400">â‚¹2,900</span>
               </div>
 
             </div>
@@ -215,7 +215,7 @@ export default function Landing() {
             Join thousands of young professionals saving smarter with SpendLens.
           </p>
           <Link to="/register" className="btn btn-primary btn-lg">
-            Get Started — It's Free <ArrowRight size={18} />
+            Get Started â€” It's Free <ArrowRight size={18} />
           </Link>
         </motion.div>
       </section>
@@ -228,7 +228,7 @@ export default function Landing() {
           min-height: 100vh;
         }
 
-        /* Decorative shapes — removed */
+        /* Decorative shapes â€” removed */
         .landing-shapes { display: none; }
 
         /* Nav */
@@ -358,7 +358,7 @@ export default function Landing() {
         .feature-icon {
           width: 48px;
           height: 48px;
-          border-radius: 0;
+          border-radius: 10px;
           display: flex;
           align-items: center;
           justify-content: center;
@@ -411,3 +411,4 @@ export default function Landing() {
     </div>
   );
 }
+

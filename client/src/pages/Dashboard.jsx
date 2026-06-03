@@ -23,7 +23,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return (
     <div className="glass-card" style={{ padding: '10px 16px', fontSize: '0.82rem' }}>
       <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₹{payload[0].value.toLocaleString()}</div>
+      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>â‚¹{payload[0].value.toLocaleString()}</div>
     </div>
   );
 };
@@ -53,12 +53,14 @@ export default function Dashboard() {
           setExpenses([]);
         }
 
-        if (trendRes.status === 'fulfilled' && Array.isArray(trendRes.value) && trendRes.value.length) {
-          setChartData(trendRes.value);
+        if (trendRes.status === 'fulfilled') {
+          const trendData = trendRes.value?.trend || trendRes.value;
+          if (Array.isArray(trendData) && trendData.length) setChartData(trendData);
         }
 
-        if (alertRes.status === 'fulfilled' && Array.isArray(alertRes.value) && alertRes.value.length) {
-          setAlerts(alertRes.value);
+        if (alertRes.status === 'fulfilled') {
+          const alertData = alertRes.value?.alerts || alertRes.value;
+          if (Array.isArray(alertData) && alertData.length) setAlerts(alertData);
         }
 
         if (dailyRes.status === 'fulfilled') {
@@ -84,8 +86,8 @@ export default function Dashboard() {
           acc[e.category] = (acc[e.category] || 0) + e.amount;
           return acc;
         }, {})
-      ).sort((a, b) => b[1] - a[1])[0]?.[0] || '—'
-    : '—';
+      ).sort((a, b) => b[1] - a[1])[0]?.[0] || 'â€”'
+    : 'â€”';
 
   const categoriesData = expenses.length
     ? Object.entries(
@@ -95,17 +97,17 @@ export default function Dashboard() {
         }, {})
       ).map(([name, amount]) => {
         const colors = {
-          Food: '#ef4444',
-          Transport: '#dc2626',
-          Entertainment: '#ef4444',
-          Bills: '#dc2626',
-          Shopping: '#ef4444'
+          Food: '#ff0000',
+          Transport: '#cc0000',
+          Entertainment: '#ff3333',
+          Bills: '#990000',
+          Shopping: '#ff0000'
         };
         return { 
           name, 
           amount, 
           percent: totalSpent ? (amount / totalSpent) : 0, 
-          color: colors[name] || '#ef4444' 
+          color: colors[name] || '#ff0000' 
         };
       })
     : [];
@@ -116,7 +118,7 @@ export default function Dashboard() {
     <div className="page-wrapper">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
         <h2 style={{ marginBottom: 4 }}>
-          Hey, <span className="gradient-text">{firstName}</span> 👋
+          Hey, <span className="gradient-text">{firstName}</span> ðŸ‘‹
         </h2>
         <p style={{ marginBottom: 32 }}>Here&apos;s your financial snapshot</p>
       </motion.div>
@@ -127,8 +129,8 @@ export default function Dashboard() {
         <motion.div variants={container} initial="hidden" animate="show">
           {/* Stats */}
           <motion.div className="stats-grid" variants={item} style={{ marginBottom: 32 }}>
-            <StatCard icon={DollarSign} label="Total Spent" value={`₹${totalSpent.toFixed(2)}`} color="pink" trend="up" trendValue="12%" />
-            <StatCard icon={Wallet} label="Remaining Budget" value={`₹${remaining.toFixed(2)}`} color="teal" trend={remaining > 0 ? 'up' : 'down'} trendValue={`${((remaining / budget) * 100).toFixed(0)}%`} />
+            <StatCard icon={DollarSign} label="Total Spent" value={`â‚¹${totalSpent.toFixed(2)}`} color="pink" trend="up" trendValue="12%" />
+            <StatCard icon={Wallet} label="Remaining Budget" value={`â‚¹${remaining.toFixed(2)}`} color="teal" trend={remaining > 0 ? 'up' : 'down'} trendValue={`${((remaining / budget) * 100).toFixed(0)}%`} />
             <StatCard icon={Tag} label="Top Category" value={topCategory.charAt(0).toUpperCase() + topCategory.slice(1)} color="purple" />
             <StatCard icon={Hash} label="Transactions" value={expenses.length} color="blue" />
           </motion.div>
@@ -139,7 +141,7 @@ export default function Dashboard() {
               <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
                 <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>Spending Trend</h4>
               </div>
-              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Last 6 months</p>
+              <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Last 30 days of trends</p>
               
               {chartData.length > 0 ? (
                 <div style={{ height: '300px', width: '100%' }}>
@@ -149,7 +151,7 @@ export default function Dashboard() {
                       <XAxis dataKey="month" tick={{ fill: 'var(--text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} />
                       <YAxis tick={{ fill: 'var(--text-muted)', fontSize: 12 }} axisLine={false} tickLine={false} />
                       <Tooltip content={<CustomTooltip />} cursor={{ fill: 'var(--bg-glass-hover)' }} />
-                      <Bar dataKey="total" fill="var(--text-primary)" radius={[4, 4, 0, 0]} maxBarSize={40} />
+                      <Bar dataKey="total" fill="#ff0000" radius={[4, 4, 0, 0]} maxBarSize={40} />
                     </BarChart>
                   </ResponsiveContainer>
                 </div>
@@ -178,7 +180,7 @@ export default function Dashboard() {
                         <span style={{ fontWeight: 500 }}>{cat.name}</span>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontWeight: 600 }}>₹{cat.amount.toFixed(2)}</div>
+                        <div style={{ fontWeight: 600 }}>â‚¹{cat.amount.toFixed(2)}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{Math.round(cat.percent * 100)}%</div>
                       </div>
                     </div>
@@ -222,14 +224,14 @@ export default function Dashboard() {
                       <Tooltip content={<CustomTooltip />} />
                       <defs>
                         <linearGradient id="colorDailyDash" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#ef4444" stopOpacity={0.15}/>
-                          <stop offset="95%" stopColor="#ef4444" stopOpacity={0}/>
+                          <stop offset="5%" stopColor="#ff0000" stopOpacity={0.15}/>
+                          <stop offset="95%" stopColor="#ff0000" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
                       <Area 
                         type="monotone" 
                         dataKey="total" 
-                        stroke="#ef4444" 
+                        stroke="#ff0000" 
                         strokeWidth={2}
                         fillOpacity={1} 
                         fill="url(#colorDailyDash)" 
@@ -261,3 +263,4 @@ export default function Dashboard() {
     </div>
   );
 }
+

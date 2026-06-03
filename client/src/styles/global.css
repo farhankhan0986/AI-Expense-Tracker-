@@ -1,90 +1,117 @@
 /* =============================================
-   SpendLens — Dark Slate + Red UI
+   SpendLens — Premium Dark UI with True Red
    ============================================= */
 
-@import url('https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&display=swap');
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&family=Space+Grotesk:wght@300..700&display=swap');
 @tailwind base;
 @tailwind components;
 @tailwind utilities;
 
-
 :root {
-  /* Background & surfaces — slate 800/900 */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-surface: #1e293b;
-  --bg-glass: #1e293b;
-  --bg-glass-hover: #334155;
-  --bg-glass-border: #334155;
+  /* ── Background surfaces ── */
+  --bg-primary:        #080b12;
+  --bg-secondary:      #0d1117;
+  --bg-surface:        #111620;
+  --bg-glass:          rgba(17, 22, 32, 0.85);
+  --bg-glass-hover:    rgba(255, 0, 0, 0.04);
+  --bg-glass-border:   rgba(255, 255, 255, 0.07);
+  --bg-card:           rgba(15, 20, 30, 0.9);
 
-  /* Accent colors — red 500/600 */
-  --accent-red: #ef4444;
-  --accent-red-dim: rgba(239, 68, 68, 0.15);
-  --accent-red-dark: #dc2626;
+  /* ── TRUE Red accent palette ── */
+  --red-50:   #fff0f0;
+  --red-100:  #ffe0e0;
+  --red-200:  #ffb3b3;
+  --red-300:  #ff7070;
+  --red-400:  #ff3333;
+  --red-500:  #ff0000;
+  --red-600:  #cc0000;
+  --red-700:  #990000;
+  --red-800:  #660000;
+  --red-900:  #330000;
 
-  /* Legacy aliases → all map to red now */
-  --accent-purple: #ef4444;
-  --accent-purple-dim: rgba(239, 68, 68, 0.15);
-  --accent-teal: #ef4444;
-  --accent-teal-dim: rgba(239, 68, 68, 0.1);
-  --accent-pink: #ef4444;
-  --accent-pink-dim: rgba(239, 68, 68, 0.1);
-  --accent-blue: #ef4444;
-  --accent-blue-dim: rgba(239, 68, 68, 0.1);
-  --accent-orange: #ef4444;
-  --accent-orange-dim: rgba(239, 68, 68, 0.1);
-  --accent-white: #ffffff;
-  --accent-white-dim: rgba(255, 255, 255, 0.1);
+  --accent-red:       #ff0000;
+  --accent-red-dim:   rgba(255, 0, 0, 0.12);
+  --accent-red-glow:  rgba(255, 0, 0, 0.35);
+  --accent-red-dark:  #cc0000;
+  --accent-red-light: #ff3333;
 
-  /* Flat replacements for gradients */
-  --gradient-primary: #ef4444;
-  --gradient-secondary: #1e293b;
-  --gradient-warm: #ef4444;
-  --gradient-cool: #ef4444;
-  --gradient-hero: #0f172a;
+  /* Legacy aliases → pure red */
+  --accent-purple:      #ff0000;
+  --accent-purple-dim:  rgba(255, 0, 0, 0.12);
+  --accent-teal:        #ff0000;
+  --accent-teal-dim:    rgba(255, 0, 0, 0.1);
+  --accent-pink:        #ff0000;
+  --accent-pink-dim:    rgba(255, 0, 0, 0.1);
+  --accent-blue:        #ff0000;
+  --accent-blue-dim:    rgba(255, 0, 0, 0.1);
+  --accent-orange:      #ff0000;
+  --accent-orange-dim:  rgba(255, 0, 0, 0.1);
+  --accent-white:       #ffffff;
+  --accent-white-dim:   rgba(255, 255, 255, 0.08);
 
-  /* Text */
-  --text-primary: #f8fafc;
-  --text-secondary: #94a3b8;
-  --text-muted: #64748b;
-  --text-inverse: #0f172a;
+  /* ── Gradients ── */
+  --gradient-primary:    linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
+  --gradient-hero:       linear-gradient(160deg, #080b12 0%, #140004 50%, #080b12 100%);
+  --gradient-card:       linear-gradient(135deg, rgba(255,0,0,0.05) 0%, transparent 60%);
+  --gradient-glow:       radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,0,0,0.15) 0%, transparent 70%);
+  --gradient-sidebar:    linear-gradient(180deg, #0d1117 0%, #080b12 100%);
+  --gradient-red-text:   linear-gradient(135deg, #ff3333 0%, #ff0000 50%, #cc0000 100%);
+  --gradient-secondary:  #111620;
+  --gradient-warm:       #ff0000;
+  --gradient-cool:       #ff0000;
 
-  /* Semantic */
-  --success: #10b981;
-  --warning: #f59e0b;
-  --danger: #ef4444;
-  --info: #ef4444;
+  /* ── Text ── */
+  --text-primary:   #f0f4ff;
+  --text-secondary: #8892a4;
+  --text-muted:     #4d5566;
+  --text-inverse:   #080b12;
+  --text-red:       #ff0000;
 
-  /* Typography */
-  --font-body: 'Inter', system-ui, -apple-system, sans-serif;
-  --font-display: 'Inter', system-ui, -apple-system, sans-serif;
+  /* ── Semantic ── */
+  --success:  #00c875;
+  --warning:  #f5a623;
+  --danger:   #ff0000;
+  --info:     #ff0000;
 
-  /* Spacing */
-  --sidebar-width: 260px;
+  /* ── Typography ── */
+  --font-body:    'Inter', system-ui, -apple-system, sans-serif;
+  --font-display: 'Space Grotesk', 'Inter', system-ui, sans-serif;
+
+  /* ── Layout ── */
+  --sidebar-width:     268px;
   --sidebar-collapsed: 72px;
 
-  /* Radii — all 0 (edgy) */
-  --radius-sm: 0px;
-  --radius-md: 0px;
-  --radius-lg: 0px;
-  --radius-xl: 0px;
-  --radius-full: 0px;
+  /* ── Radii ── */
+  --radius-sm:   6px;
+  --radius-md:   10px;
+  --radius-lg:   16px;
+  --radius-xl:   24px;
+  --radius-full: 9999px;
 
-  /* Shadows */
+  /* ── Shadows ── */
+  --shadow-sm:          0 1px 3px rgba(0,0,0,0.4);
+  --shadow-md:          0 4px 16px rgba(0,0,0,0.5);
+  --shadow-lg:          0 8px 32px rgba(0,0,0,0.6);
+  --shadow-xl:          0 16px 48px rgba(0,0,0,0.7);
+  --shadow-glow-red:    0 0 24px rgba(255,0,0,0.4), 0 0 48px rgba(255,0,0,0.15);
+  --shadow-glow-sm:     0 0 12px rgba(255,0,0,0.3);
+  --shadow-elevated:    0 4px 24px rgba(0,0,0,0.5), 0 1px 0 rgba(255,255,255,0.05) inset;
+  --shadow-card:        0 2px 16px rgba(0,0,0,0.4), 0 1px 0 rgba(255,255,255,0.04) inset;
   --shadow-glow-purple: none;
-  --shadow-glow-teal: none;
-  --shadow-glow-pink: none;
-  --shadow-elevated: 0 4px 14px 0 rgba(0, 0, 0, 0.4);
+  --shadow-glow-teal:   none;
+  --shadow-glow-pink:   none;
 
-  /* Transitions */
-  --ease-spring: cubic-bezier(0.25, 1, 0.5, 1);
-  --ease-smooth: ease-in-out;
-  --duration-fast: 150ms;
+  /* ── Transitions ── */
+  --ease-spring:   cubic-bezier(0.25, 1, 0.5, 1);
+  --ease-smooth:   cubic-bezier(0.4, 0, 0.2, 1);
+  --ease-out:      cubic-bezier(0, 0, 0.2, 1);
+  --ease-bounce:   cubic-bezier(0.34, 1.56, 0.64, 1);
+  --duration-fast:   150ms;
   --duration-normal: 250ms;
-  --duration-slow: 400ms;
+  --duration-slow:   400ms;
 }
 
-/* ---- Reset & Base ---- */
+/* ── Reset & Base ── */
 *,
 *::before,
 *::after {
@@ -107,49 +134,42 @@ body {
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
+  background-image:
+    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,0,0,0.08) 0%, transparent 60%),
+    radial-gradient(ellipse 40% 30% at 100% 80%, rgba(255,0,0,0.04) 0%, transparent 50%);
 }
 
 #root {
   min-height: 100vh;
 }
 
-/* ---- Custom scrollbar ---- */
-::-webkit-scrollbar {
-  width: 6px;
-  height: 6px;
-}
-::-webkit-scrollbar-track {
-  background: transparent;
-}
+/* ── Custom scrollbar ── */
+::-webkit-scrollbar { width: 5px; height: 5px; }
+::-webkit-scrollbar-track { background: transparent; }
 ::-webkit-scrollbar-thumb {
-  background: var(--bg-glass-border);
+  background: rgba(255,0,0,0.3);
   border-radius: var(--radius-full);
 }
-::-webkit-scrollbar-thumb:hover {
-  background: var(--text-muted);
-}
-* {
-  scrollbar-width: thin;
-  scrollbar-color: var(--bg-glass-border) transparent;
-}
+::-webkit-scrollbar-thumb:hover { background: rgba(255,0,0,0.6); }
+* { scrollbar-width: thin; scrollbar-color: rgba(255,0,0,0.3) transparent; }
 
-/* ---- Typography ---- */
+/* ── Typography ── */
 h1, h2, h3, h4, h5, h6 {
   font-family: var(--font-display);
-  font-weight: 600;
-  line-height: 1.2;
+  font-weight: 700;
+  line-height: 1.15;
   color: var(--text-primary);
-  letter-spacing: -0.02em;
+  letter-spacing: -0.025em;
 }
 
-h1 { font-size: clamp(2rem, 5vw, 2.5rem); }
-h2 { font-size: clamp(1.5rem, 3vw, 1.75rem); }
-h3 { font-size: clamp(1.25rem, 2.5vw, 1.5rem); }
-h4 { font-size: 1.125rem; }
+h1 { font-size: clamp(2rem, 5vw, 2.75rem); }
+h2 { font-size: clamp(1.5rem, 3vw, 2rem); }
+h3 { font-size: clamp(1.2rem, 2.5vw, 1.5rem); }
+h4 { font-size: 1.1rem; font-weight: 600; }
 
 p {
   color: var(--text-secondary);
-  line-height: 1.7;
+  line-height: 1.75;
 }
 
 a {
@@ -158,40 +178,70 @@ a {
   font-weight: 500;
   transition: color var(--duration-fast) var(--ease-smooth);
 }
-a:hover {
-  color: var(--accent-blue);
-}
+a:hover { color: var(--accent-red); }
 
-/* ---- Card ---- */
+/* ── Glass Card ── */
 .glass-card {
   background: var(--bg-glass);
   border: 1px solid var(--bg-glass-border);
-  border-radius: 0;
-  box-shadow: none;
-  transition: border-color var(--duration-fast);
+  border-radius: var(--radius-lg);
+  box-shadow: var(--shadow-card);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  transition: border-color var(--duration-normal) var(--ease-smooth),
+              box-shadow var(--duration-normal) var(--ease-smooth),
+              transform var(--duration-normal) var(--ease-smooth);
+  position: relative;
+  overflow: hidden;
+}
+
+.glass-card::before {
+  content: '';
+  position: absolute;
+  inset: 0;
+  background: var(--gradient-card);
+  pointer-events: none;
+  opacity: 0;
+  transition: opacity var(--duration-normal);
+  border-radius: inherit;
 }
 
 .glass-card:hover {
-  border-color: var(--accent-red);
+  border-color: rgba(255, 0, 0, 0.25);
+  box-shadow: var(--shadow-card), 0 0 0 1px rgba(255,0,0,0.1) inset;
 }
+
+.glass-card:hover::before { opacity: 1; }
 
 .glass-card-interactive:hover {
-  transform: none;
-  box-shadow: none;
+  transform: translateY(-2px);
+  box-shadow: var(--shadow-lg), var(--shadow-glow-sm);
 }
 
-/* ---- Gradient text utility (overwritten for red) ---- */
+/* ── Gradient text utility ── */
 .gradient-text {
-  color: var(--accent-red);
+  background: var(--gradient-red-text);
+  -webkit-background-clip: text;
+  -webkit-text-fill-color: transparent;
+  background-clip: text;
 }
-.gradient-text-secondary {
-  color: var(--text-secondary);
+.gradient-text-secondary { color: var(--text-secondary); }
+
+/* ── Glow pulse animation ── */
+@keyframes glowPulse {
+  0%, 100% { box-shadow: 0 0 16px rgba(255,0,0,0.2); }
+  50%       { box-shadow: 0 0 32px rgba(255,0,0,0.5), 0 0 64px rgba(255,0,0,0.2); }
 }
 
-/* ---- Shared Animation Keyframes ---- */
+/* ── Shared Animation Keyframes ── */
 @keyframes fadeInUp {
-  from { opacity: 0; transform: translateY(12px); }
-  to { opacity: 1; transform: translateY(0); }
+  from { opacity: 0; transform: translateY(16px); }
+  to   { opacity: 1; transform: translateY(0); }
+}
+
+@keyframes fadeIn {
+  from { opacity: 0; }
+  to   { opacity: 1; }
 }
 
 @keyframes spin-slow {
@@ -199,48 +249,63 @@ a:hover {
   to   { transform: rotate(360deg); }
 }
 
-/* ---- Loading spinner ---- */
+@keyframes shimmer {
+  0%   { background-position: -200% 0; }
+  100% { background-position: 200% 0; }
+}
+
+@keyframes redPing {
+  0%   { transform: scale(1); opacity: 1; }
+  75%, 100% { transform: scale(1.4); opacity: 0; }
+}
+
+/* ── Loading spinner ── */
 .loading-spinner {
-  width: 24px;
-  height: 24px;
-  border: 2px solid var(--bg-glass-border);
+  width: 28px;
+  height: 28px;
+  border: 2px solid rgba(255,0,0,0.15);
   border-top-color: var(--accent-red);
   border-radius: 50%;
-  animation: spin-slow 0.6s linear infinite;
+  animation: spin-slow 0.7s linear infinite;
 }
 
 .loading-container {
   display: flex;
+  flex-direction: column;
   align-items: center;
   justify-content: center;
   min-height: 200px;
+  gap: 12px;
+  color: var(--text-muted);
+  font-size: 0.85rem;
 }
 
-/* ---- Toast / feedback ---- */
+/* ── Toast / feedback ── */
 .toast {
   position: fixed;
-  bottom: 24px;
-  right: 24px;
-  padding: 12px 20px;
-  border-radius: 0;
+  bottom: 28px;
+  right: 28px;
+  padding: 14px 22px;
+  border-radius: var(--radius-md);
   font-size: 0.9rem;
   font-weight: 500;
   z-index: 9999;
-  animation: fadeInUp 0.35s var(--ease-spring);
+  animation: fadeInUp 0.35s var(--ease-bounce);
   background: var(--bg-surface);
   border: 1px solid var(--bg-glass-border);
-  box-shadow: var(--shadow-elevated);
+  box-shadow: var(--shadow-lg);
   color: var(--text-primary);
+  backdrop-filter: blur(16px);
 }
 
 .toast-success { border-left: 3px solid var(--success); }
-.toast-error { border-left: 3px solid var(--accent-red); }
+.toast-error   { border-left: 3px solid var(--accent-red); }
 
-/* ---- Utilities ---- */
+/* ── Utilities ── */
 .sr-only {
   position: absolute;
   width: 1px; height: 1px; padding: 0; margin: -1px;
-  overflow: hidden; clip: rect(0, 0, 0, 0); border: 0;
+  overflow: hidden; clip: rect(0,0,0,0); border: 0;
 }
 
 .page-wrapper {
@@ -249,15 +314,33 @@ a:hover {
 
 .section-title {
   font-family: var(--font-display);
-  font-size: 0.85rem;
+  font-size: 0.78rem;
   font-weight: 600;
-  color: var(--text-secondary);
+  color: var(--text-muted);
   text-transform: uppercase;
-  letter-spacing: 0.05em;
+  letter-spacing: 0.1em;
   margin-bottom: 1rem;
 }
 
-/* ---- Layout Overrides ---- */
+/* ── Red accent dot (pulsing) ── */
+.red-dot {
+  display: inline-block;
+  width: 8px;
+  height: 8px;
+  border-radius: 50%;
+  background: var(--accent-red);
+  position: relative;
+}
+.red-dot::after {
+  content: '';
+  position: absolute;
+  inset: 0;
+  border-radius: 50%;
+  background: var(--accent-red);
+  animation: redPing 1.5s ease-in-out infinite;
+}
+
+/* ── Layout Overrides ── */
 .ledger-layout {
   display: grid;
   grid-template-columns: 1fr 300px;
@@ -269,4 +352,11 @@ a:hover {
 @media (max-width: 900px) {
   .ledger-layout { grid-template-columns: 1fr !important; }
   .insights-sidebar { display: none; }
+}
+
+/* ── Divider ── */
+.divider {
+  height: 1px;
+  background: linear-gradient(90deg, transparent, var(--bg-glass-border), transparent);
+  margin: 24px 0;
 }
