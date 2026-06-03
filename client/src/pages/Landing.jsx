@@ -107,7 +107,7 @@ export default function Landing() {
             {/* Total Spending */}
             <div className="mb-5">
               <p className="text-sm text-gray-400">Monthly Spending</p>
-              <h2 className="text-2xl font-semibold text-white">â‚¹18,420</h2>
+              <h2 className="text-2xl font-semibold text-white">₹18,420</h2>
             </div>
 
             {/* Categories */}
@@ -122,7 +122,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-500 w-[70%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">â‚¹6,200</span>
+                <span className="text-sm text-gray-400">₹6,200</span>
               </div>
 
               {/* Transport */}
@@ -134,7 +134,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-400 w-[40%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">â‚¹3,100</span>
+                <span className="text-sm text-gray-400">₹3,100</span>
               </div>
 
               {/* Shopping */}
@@ -146,7 +146,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-600 w-[55%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">â‚¹4,800</span>
+                <span className="text-sm text-gray-400">₹4,800</span>
               </div>
 
               {/* Bills */}
@@ -158,7 +158,7 @@ export default function Landing() {
                     <div className="h-2 bg-red-300 w-[35%]"></div>
                   </div>
                 </div>
-                <span className="text-sm text-gray-400">â‚¹2,900</span>
+                <span className="text-sm text-gray-400">₹2,900</span>
               </div>
 
             </div>

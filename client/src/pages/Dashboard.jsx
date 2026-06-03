@@ -23,7 +23,7 @@ const CustomTooltip = ({ active, payload, label }) => {
   return (
     <div className="glass-card" style={{ padding: '10px 16px', fontSize: '0.82rem' }}>
       <div style={{ color: 'var(--text-muted)', marginBottom: 4 }}>{label}</div>
-      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>â‚¹{payload[0].value.toLocaleString()}</div>
+      <div style={{ fontWeight: 700, color: 'var(--text-primary)' }}>₹{payload[0].value.toLocaleString()}</div>
     </div>
   );
 };
@@ -86,8 +86,8 @@ export default function Dashboard() {
           acc[e.category] = (acc[e.category] || 0) + e.amount;
           return acc;
         }, {})
-      ).sort((a, b) => b[1] - a[1])[0]?.[0] || 'â€”'
-    : 'â€”';
+      ).sort((a, b) => b[1] - a[1])[0]?.[0] || '—'
+    : '—';
 
   const categoriesData = expenses.length
     ? Object.entries(
@@ -103,11 +103,11 @@ export default function Dashboard() {
           Bills: '#990000',
           Shopping: '#ff0000'
         };
-        return { 
-          name, 
-          amount, 
-          percent: totalSpent ? (amount / totalSpent) : 0, 
-          color: colors[name] || '#ff0000' 
+        return {
+          name,
+          amount,
+          percent: totalSpent ? (amount / totalSpent) : 0,
+          color: colors[name] || '#ff0000'
         };
       })
     : [];
@@ -129,20 +129,20 @@ export default function Dashboard() {
         <motion.div variants={container} initial="hidden" animate="show">
           {/* Stats */}
           <motion.div className="stats-grid" variants={item} style={{ marginBottom: 32 }}>
-            <StatCard icon={DollarSign} label="Total Spent" value={`â‚¹${totalSpent.toFixed(2)}`} color="pink" trend="up" trendValue="12%" />
-            <StatCard icon={Wallet} label="Remaining Budget" value={`â‚¹${remaining.toFixed(2)}`} color="teal" trend={remaining > 0 ? 'up' : 'down'} trendValue={`${((remaining / budget) * 100).toFixed(0)}%`} />
+            <StatCard icon={DollarSign} label="Total Spent" value={`₹${totalSpent.toFixed(2)}`} color="pink" trend="up" trendValue="this month" />
+            <StatCard icon={Wallet} label="Remaining Budget" value={`₹${remaining.toFixed(2)}`} color="teal" trend={remaining > 0 ? 'up' : 'down'} trendValue={`${((remaining / budget) * 100).toFixed(0)}% left`} />
             <StatCard icon={Tag} label="Top Category" value={topCategory.charAt(0).toUpperCase() + topCategory.slice(1)} color="purple" />
             <StatCard icon={Hash} label="Transactions" value={expenses.length} color="blue" />
           </motion.div>
 
-          {/* Flat Table and Chart */}
+          {/* Charts */}
           <motion.div style={{ display: 'grid', gridTemplateColumns: 'repeat(auto-fit, minmax(320px, 1fr))', gap: '24px', marginBottom: 32 }} variants={item}>
             <div className="glass-card" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <div style={{ marginBottom: '6px' }}>
                 <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>Spending Trend</h4>
               </div>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Last 30 days of trends</p>
-              
+
               {chartData.length > 0 ? (
                 <div style={{ height: '300px', width: '100%' }}>
                   <ResponsiveContainer width="100%" height="100%">
@@ -163,24 +163,24 @@ export default function Dashboard() {
             </div>
 
             <div className="glass-card" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>Category Breakdown</h4>
                 <Link to="/expenses" className="btn btn-ghost btn-sm">
                   View Data <ArrowRight size={14} />
                 </Link>
               </div>
               <p style={{ color: 'var(--text-muted)', fontSize: '0.85rem', marginBottom: '20px' }}>Distribution of expenses</p>
-              
+
               {categoriesData.length > 0 ? (
                 <div style={{ display: 'flex', flexDirection: 'column', gap: '12px' }}>
                   {categoriesData.map((cat, i) => (
                     <div key={i} style={{ display: 'flex', alignItems: 'center', justifyContent: 'space-between', borderBottom: i < categoriesData.length - 1 ? '1px solid var(--bg-glass-border)' : 'none', paddingBottom: i < categoriesData.length - 1 ? '12px' : '0' }}>
-                      <div style={{ display: 'flex', alignItems: 'center', gap: '8px' }}>
-                        <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: cat.color }}></div>
+                      <div style={{ display: 'flex', alignItems: 'center', gap: '10px' }}>
+                        <div style={{ width: '10px', height: '10px', borderRadius: '50%', backgroundColor: cat.color, boxShadow: `0 0 6px ${cat.color}` }}></div>
                         <span style={{ fontWeight: 500 }}>{cat.name}</span>
                       </div>
                       <div style={{ textAlign: 'right' }}>
-                        <div style={{ fontWeight: 600 }}>â‚¹{cat.amount.toFixed(2)}</div>
+                        <div style={{ fontWeight: 600 }}>₹{cat.amount.toFixed(2)}</div>
                         <div style={{ fontSize: '0.75rem', color: 'var(--text-muted)' }}>{Math.round(cat.percent * 100)}%</div>
                       </div>
                     </div>
@@ -197,7 +197,7 @@ export default function Dashboard() {
           {/* Daily Analysis Flow */}
           <motion.div variants={item} style={{ marginBottom: 32 }}>
             <div className="glass-card" style={{ padding: '24px' }}>
-              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '10px' }}>
+              <div style={{ display: 'flex', justifyContent: 'space-between', alignItems: 'center', marginBottom: '6px' }}>
                 <h4 style={{ fontFamily: 'var(--font-display)', letterSpacing: '0px' }}>30-Day Daily Analysis</h4>
                 <Link to="/analytics" className="btn btn-ghost btn-sm">
                   Full Analytics <ArrowRight size={14} />
@@ -210,10 +210,10 @@ export default function Dashboard() {
                   <ResponsiveContainer width="100%" height="100%">
                     <AreaChart data={dailyData} margin={{ top: 10, right: 10, left: -20, bottom: 0 }}>
                       <CartesianGrid strokeDasharray="3 3" stroke="var(--bg-glass-border)" vertical={false} />
-                      <XAxis 
-                        dataKey="date" 
-                        tick={{ fill: 'var(--text-muted)', fontSize: 10 }} 
-                        axisLine={false} 
+                      <XAxis
+                        dataKey="date"
+                        tick={{ fill: 'var(--text-muted)', fontSize: 10 }}
+                        axisLine={false}
                         tickLine={false}
                         tickFormatter={(val) => {
                           const [, m, d] = val.split('-');
@@ -224,17 +224,17 @@ export default function Dashboard() {
                       <Tooltip content={<CustomTooltip />} />
                       <defs>
                         <linearGradient id="colorDailyDash" x1="0" y1="0" x2="0" y2="1">
-                          <stop offset="5%" stopColor="#ff0000" stopOpacity={0.15}/>
+                          <stop offset="5%"  stopColor="#ff0000" stopOpacity={0.2}/>
                           <stop offset="95%" stopColor="#ff0000" stopOpacity={0}/>
                         </linearGradient>
                       </defs>
-                      <Area 
-                        type="monotone" 
-                        dataKey="total" 
-                        stroke="#ff0000" 
-                        strokeWidth={2}
-                        fillOpacity={1} 
-                        fill="url(#colorDailyDash)" 
+                      <Area
+                        type="monotone"
+                        dataKey="total"
+                        stroke="#ff0000"
+                        strokeWidth={2.5}
+                        fillOpacity={1}
+                        fill="url(#colorDailyDash)"
                       />
                     </AreaChart>
                   </ResponsiveContainer>
@@ -263,4 +263,3 @@ export default function Dashboard() {
     </div>
   );
 }
-
