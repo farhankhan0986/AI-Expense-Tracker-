@@ -8,70 +8,51 @@
 @tailwind utilities;
 
 :root {
-  /* ── Background surfaces ── */
-  --bg-primary:        #080b12;
-  --bg-secondary:      #0d1117;
-  --bg-surface:        #111620;
-  --bg-glass:          rgba(17, 22, 32, 0.85);
-  --bg-glass-hover:    rgba(255, 0, 0, 0.04);
-  --bg-glass-border:   rgba(255, 255, 255, 0.07);
-  --bg-card:           rgba(15, 20, 30, 0.9);
+  /* Background & surfaces — slate 800/900 */
+  --bg-primary: #0f172a;
+  --bg-secondary: #1e293b;
+  --bg-surface: #1e293b;
+  --bg-glass: #1e293b;
+  --bg-glass-hover: #334155;
+  --bg-glass-border: #334155;
 
-  /* ── TRUE Red accent palette ── */
-  --red-50:   #fff0f0;
-  --red-100:  #ffe0e0;
-  --red-200:  #ffb3b3;
-  --red-300:  #ff7070;
-  --red-400:  #ff3333;
-  --red-500:  #ff0000;
-  --red-600:  #cc0000;
-  --red-700:  #990000;
-  --red-800:  #660000;
-  --red-900:  #330000;
+  /* Accent colors — red 500/600 */
+  --accent-red: #ef4444;
+  --accent-red-dim: rgba(239, 68, 68, 0.15);
+  --accent-red-dark: #dc2626;
 
-  --accent-red:       #ff0000;
-  --accent-red-dim:   rgba(255, 0, 0, 0.12);
-  --accent-red-glow:  rgba(255, 0, 0, 0.35);
-  --accent-red-dark:  #cc0000;
-  --accent-red-light: #ff3333;
+  /* Legacy aliases → all map to red now */
+  --accent-purple: #ef4444;
+  --accent-purple-dim: rgba(239, 68, 68, 0.15);
+  --accent-teal: #ef4444;
+  --accent-teal-dim: rgba(239, 68, 68, 0.1);
+  --accent-pink: #ef4444;
+  --accent-pink-dim: rgba(239, 68, 68, 0.1);
+  --accent-blue: #ef4444;
+  --accent-blue-dim: rgba(239, 68, 68, 0.1);
+  --accent-orange: #ef4444;
+  --accent-orange-dim: rgba(239, 68, 68, 0.1);
+  --accent-white: #ffffff;
+  --accent-white-dim: rgba(255, 255, 255, 0.1);
 
-  /* Legacy aliases → pure red */
-  --accent-purple:      #ff0000;
-  --accent-purple-dim:  rgba(255, 0, 0, 0.12);
-  --accent-teal:        #ff0000;
-  --accent-teal-dim:    rgba(255, 0, 0, 0.1);
-  --accent-pink:        #ff0000;
-  --accent-pink-dim:    rgba(255, 0, 0, 0.1);
-  --accent-blue:        #ff0000;
-  --accent-blue-dim:    rgba(255, 0, 0, 0.1);
-  --accent-orange:      #ff0000;
-  --accent-orange-dim:  rgba(255, 0, 0, 0.1);
-  --accent-white:       #ffffff;
-  --accent-white-dim:   rgba(255, 255, 255, 0.08);
+  /* Flat replacements for gradients */
+  --gradient-primary: #ef4444;
+  --gradient-secondary: #1e293b;
+  --gradient-warm: #ef4444;
+  --gradient-cool: #ef4444;
+  --gradient-hero: #0f172a;
 
-  /* ── Gradients ── */
-  --gradient-primary:    linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
-  --gradient-hero:       linear-gradient(160deg, #080b12 0%, #140004 50%, #080b12 100%);
-  --gradient-card:       linear-gradient(135deg, rgba(255,0,0,0.05) 0%, transparent 60%);
-  --gradient-glow:       radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,0,0,0.15) 0%, transparent 70%);
-  --gradient-sidebar:    linear-gradient(180deg, #0d1117 0%, #080b12 100%);
-  --gradient-red-text:   linear-gradient(135deg, #ff3333 0%, #ff0000 50%, #cc0000 100%);
-  --gradient-secondary:  #111620;
-  --gradient-warm:       #ff0000;
-  --gradient-cool:       #ff0000;
+  /* Text */
+  --text-primary: #f8fafc;
+  --text-secondary: #94a3b8;
+  --text-muted: #64748b;
+  --text-inverse: #0f172a;
 
-  /* ── Text ── */
-  --text-primary:   #f0f4ff;
-  --text-secondary: #8892a4;
-  --text-muted:     #4d5566;
-  --text-inverse:   #080b12;
-  --text-red:       #ff0000;
-
-  /* ── Semantic ── */
-  --success:  #00c875;
-  --warning:  #f5a623;
-  --danger:   #ff0000;
-  --info:     #ff0000;
+  /* Semantic */
+  --success: #10b981;
+  --warning: #f59e0b;
+  --danger: #ef4444;
+  --info: #ef4444;
 
   /* ── Typography ── */
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
@@ -178,7 +159,9 @@ a {
   font-weight: 500;
   transition: color var(--duration-fast) var(--ease-smooth);
 }
-a:hover { color: var(--accent-red); }
+a:hover {
+  color: var(--accent-blue);
+}
 
 /* ── Glass Card ── */
 .glass-card {

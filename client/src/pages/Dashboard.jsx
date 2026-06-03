@@ -118,7 +118,7 @@ export default function Dashboard() {
     <div className="page-wrapper">
       <motion.div initial={{ opacity: 0, y: 10 }} animate={{ opacity: 1, y: 0 }} transition={{ duration: 0.4 }}>
         <h2 style={{ marginBottom: 4 }}>
-          Hey, <span className="gradient-text">{firstName}</span> ðŸ‘‹
+          Hey, <span className="gradient-text">{firstName}</span> 👋
         </h2>
         <p style={{ marginBottom: 32 }}>Here&apos;s your financial snapshot</p>
       </motion.div>
