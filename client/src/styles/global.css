@@ -8,39 +8,44 @@
 @tailwind utilities;
 
 :root {
-  /* Background & surfaces — slate 800/900 */
-  --bg-primary: #0f172a;
-  --bg-secondary: #1e293b;
-  --bg-surface: #1e293b;
-  --bg-glass: #1e293b;
-  --bg-glass-hover: #334155;
-  --bg-glass-border: #334155;
+  /* ── Background surfaces ── */
+  --bg-primary:        #000000;
+  --bg-secondary:      #0a0a0a;
+  --bg-surface:        #111111;
+  --bg-glass:          rgba(10, 10, 10, 0.9);
+  --bg-glass-hover:    rgba(255, 0, 0, 0.05);
+  --bg-glass-border:   rgba(255, 255, 255, 0.08);
+  --bg-card:           rgba(8, 8, 8, 0.95);
 
   /* Accent colors — red 500/600 */
-  --accent-red: #ef4444;
-  --accent-red-dim: rgba(239, 68, 68, 0.15);
-  --accent-red-dark: #dc2626;
+  --accent-red: #ff0000;
+  --accent-red-dim: rgba(255, 0, 0, 0.15);
+  --accent-red-dark: #cc0000;
 
   /* Legacy aliases → all map to red now */
-  --accent-purple: #ef4444;
-  --accent-purple-dim: rgba(239, 68, 68, 0.15);
-  --accent-teal: #ef4444;
-  --accent-teal-dim: rgba(239, 68, 68, 0.1);
-  --accent-pink: #ef4444;
-  --accent-pink-dim: rgba(239, 68, 68, 0.1);
-  --accent-blue: #ef4444;
-  --accent-blue-dim: rgba(239, 68, 68, 0.1);
-  --accent-orange: #ef4444;
-  --accent-orange-dim: rgba(239, 68, 68, 0.1);
+  --accent-purple: #ff0000;
+  --accent-purple-dim: rgba(255, 0, 0, 0.15);
+  --accent-teal: #ff0000;
+  --accent-teal-dim: rgba(255, 0, 0, 0.1);
+  --accent-pink: #ff0000;
+  --accent-pink-dim: rgba(255, 0, 0, 0.1);
+  --accent-blue: #ff0000;
+  --accent-blue-dim: rgba(255, 0, 0, 0.1);
+  --accent-orange: #ff0000;
+  --accent-orange-dim: rgba(255, 0, 0, 0.1);
   --accent-white: #ffffff;
   --accent-white-dim: rgba(255, 255, 255, 0.1);
 
   /* Flat replacements for gradients */
-  --gradient-primary: #ef4444;
+  --gradient-primary:    linear-gradient(135deg, #ff0000 0%, #cc0000 100%);
   --gradient-secondary: #1e293b;
-  --gradient-warm: #ef4444;
-  --gradient-cool: #ef4444;
-  --gradient-hero: #0f172a;
+  --gradient-warm: #ff0000;
+  --gradient-cool: #ff0000;
+  --gradient-hero:       linear-gradient(160deg, #000000 0%, #0f0000 50%, #000000 100%);
+  --gradient-card:       linear-gradient(135deg, rgba(255,0,0,0.06) 0%, transparent 60%);
+  --gradient-glow:       radial-gradient(ellipse 60% 40% at 50% 0%, rgba(255,0,0,0.18) 0%, transparent 70%);
+  --gradient-sidebar:    linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
+  --gradient-red-text:   linear-gradient(135deg, #ff4444 0%, #ff0000 50%, #dd0000 100%);
 
   /* Text */
   --text-primary: #f8fafc;
@@ -51,8 +56,8 @@
   /* Semantic */
   --success: #10b981;
   --warning: #f59e0b;
-  --danger: #ef4444;
-  --info: #ef4444;
+  --danger: #ff0000;
+  --info: #ff0000;
 
   /* ── Typography ── */
   --font-body:    'Inter', system-ui, -apple-system, sans-serif;
@@ -110,14 +115,14 @@ html {
 
 body {
   font-family: var(--font-body);
-  background: var(--bg-primary);
+  background: #000000;
   color: var(--text-primary);
   line-height: 1.6;
   min-height: 100vh;
   overflow-x: hidden;
   background-image:
-    radial-gradient(ellipse 80% 50% at 50% -20%, rgba(255,0,0,0.08) 0%, transparent 60%),
-    radial-gradient(ellipse 40% 30% at 100% 80%, rgba(255,0,0,0.04) 0%, transparent 50%);
+    radial-gradient(ellipse 70% 40% at 50% -10%, rgba(255,0,0,0.1) 0%, transparent 55%),
+    radial-gradient(ellipse 35% 25% at 95% 85%, rgba(255,0,0,0.05) 0%, transparent 50%);
 }
 
 #root {

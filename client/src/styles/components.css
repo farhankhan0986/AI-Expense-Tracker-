@@ -10,7 +10,7 @@
   left: 0;
   width: var(--sidebar-width);
   height: 100vh;
-  background: var(--gradient-sidebar);
+  background: linear-gradient(180deg, #0a0a0a 0%, #000000 100%);
   border-right: 1px solid var(--bg-glass-border);
   display: flex;
   flex-direction: column;
@@ -220,7 +220,7 @@
   left: 0;
   right: 0;
   height: 58px;
-  background: rgba(8, 11, 18, 0.95);
+  background: rgba(0, 0, 0, 0.97);
   border-bottom: 1px solid var(--bg-glass-border);
   z-index: 110;
   padding: 0 16px;
@@ -307,8 +307,8 @@
 .form-select {
   width: 100%;
   padding: 13px 16px;
-  background: rgba(255,255,255,0.04);
-  border: 1px solid rgba(255,255,255,0.08);
+  background: rgba(255,255,255,0.03);
+  border: 1px solid rgba(255,255,255,0.06);
   border-radius: var(--radius-md);
   color: var(--text-primary);
   font-family: var(--font-body);
@@ -329,7 +329,7 @@
 }
 
 .form-select option {
-  background: var(--bg-secondary);
+  background: #111111;
   color: var(--text-primary);
 }
 
@@ -773,7 +773,7 @@
   justify-content: center;
   padding: 24px;
   position: relative;
-  background: var(--bg-primary);
+  background: #000000;
   overflow: hidden;
 }
 

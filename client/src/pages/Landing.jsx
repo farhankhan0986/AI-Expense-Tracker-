@@ -1,4 +1,4 @@
-﻿import { Link } from 'react-router-dom';
+import { Link } from 'react-router-dom';
 import { motion } from 'framer-motion';
 import { Sparkles, Brain, Bell, BarChart3, PiggyBank, ArrowRight, Bot } from 'lucide-react';
 import AnimatedBackground from '../components/AnimatedBackground';
@@ -240,7 +240,7 @@ export default function Landing() {
           position: relative;
           z-index: 10;
           border-bottom: 1px solid var(--bg-glass-border);
-          background: var(--bg-surface);
+          background: rgba(0, 0, 0, 0.95);
         }
 
         .landing-nav-brand {
